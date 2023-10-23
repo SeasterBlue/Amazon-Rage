@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour
     {
         gameInput.OnInteractAction += OnInteractAction;
         gameInput.OnRunAction += OnRunAction;
+        gameInput.OnJumpAction += OnJumpAction;
         gameInput.OnRunCanceled += OnRunCanceled;
         GameManager.Instance.GameOver += OnGameOver;
         GameManager.Instance.Victory += OnVictory;
@@ -129,6 +130,13 @@ public class PlayerController : MonoBehaviour
         //mandraAnimator.SetBool("isRunning", false);
         moveSpeed = isRunning ? moveSpeed / 2.0f : moveSpeed;
         isRunning = false;
+    }
+
+    private void OnJumpAction(object sender, EventArgs e)
+    {
+        Debug.Log("Saltaaaaaaaaaaaaaaaar");
+        transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x, transform.position.y + 1.0f, transform.position.z), 1.0f);
+        Debug.Log("Saltaste");
     }
 
     private void OnGameOver(object sender, EventArgs e)

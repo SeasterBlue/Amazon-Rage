@@ -7,6 +7,7 @@ public class GameInput : MonoBehaviour
     public event EventHandler OnInteractAction;
     public event EventHandler OnRunAction;
     public event EventHandler OnRunCanceled;
+    public event EventHandler OnJumpAction;
 
     private PlayerInputActions playerInputActions;
 
@@ -17,6 +18,7 @@ public class GameInput : MonoBehaviour
         playerInputActions.Player.Interact.performed += Interact_performed;
         playerInputActions.Player.Run.performed += Run_performed;
         playerInputActions.Player.Run.canceled += Run_stoped;
+        playerInputActions.Player.Jump.performed += Jump_performed;
     }
 
 
@@ -47,6 +49,11 @@ public class GameInput : MonoBehaviour
     {
         // null check OnRunCanceled
         OnRunCanceled?.Invoke(this, EventArgs.Empty);
+    }
+
+    private void Jump_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        OnJumpAction?.Invoke(this, EventArgs.Empty);
     }
 
 

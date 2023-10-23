@@ -16,7 +16,7 @@ public class Seed : MonoBehaviour
         {
             player.pickedSeed = this;
             SetSeedParent(player);
-        }else if (other.CompareTag("Player") && player.HasSeed())
+        }   else if (other.CompareTag("Player") && player.HasSeed())
         {
             Debug.Log("Ya la tienes prra");
         }
