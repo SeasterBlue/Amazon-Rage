@@ -5,8 +5,8 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     private static GameManager instance;
-    public int eggsDropped = 0;
-    [SerializeField] int eggsGoal = 1;
+    public int seedDropped = 0;
+    [SerializeField] int seedsGoal = 1;
     public static GameManager Instance
     {
         get { return instance; }
@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
 
     public event EventHandler GameOver;
     public event EventHandler Victory;
-    public event EventHandler EggPicked;
+    public event EventHandler SeedPicked;
 
     [SerializeField] private float timerDurationInMinutes = 5f;
     private bool victoryTriggered = false;
@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        OnEggPicked();
+        OnSeedPicked();
     }
 
     void Start()
@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (eggsDropped == eggsGoal && !victoryTriggered)
+        if (seedDropped == seedsGoal && !victoryTriggered)
         {
             victoryTriggered = true;
             OnVictory();
@@ -71,9 +71,9 @@ public class GameManager : MonoBehaviour
         Victory?.Invoke(this, EventArgs.Empty);
     }
 
-    public void OnEggPicked()
+    public void OnSeedPicked()
     {
-        EggPicked?.Invoke(this, EventArgs.Empty);
+        SeedPicked?.Invoke(this, EventArgs.Empty);
     }
 
 

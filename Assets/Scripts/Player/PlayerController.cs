@@ -51,7 +51,7 @@ public class PlayerController : MonoBehaviour
         bool canMove = CollisionDetection(moveDirection, moveDistance);
 
 
-        if (!mandraAnimator.GetBool("isRunning")) mandraAnimator.SetBool("isWalking", inputVector == new Vector2(0, 0) ? false : true);
+        //if (!mandraAnimator.GetBool("isRunning")) mandraAnimator.SetBool("isWalking", inputVector == new Vector2(0, 0) ? false : true);
 
         if (canMove)
         {
@@ -76,22 +76,22 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (nearNest && HasEgg())
+        if (nearNest && HasSeed())
         {
-            DestroyEgg();
-            GameManager.Instance.eggsDropped++;
+            DestroySeed();
+            GameManager.Instance.seedDropped++;
         }
     }
 
-    private void DestroyEgg()
+    private void DestroySeed()
     {
         foreach (Transform child in playerPickPoint)
         {
-            Seed egg = child.GetComponent<Seed>();
-            if (egg != null)
+            Seed seed = child.GetComponent<Seed>();
+            if (seed != null)
             {
-                egg.RemoveEggParent();
-                Destroy(egg.gameObject);
+                seed.RemoveSeedParent();
+                Destroy(seed.gameObject);
                 break;
             }
         }
@@ -111,11 +111,11 @@ public class PlayerController : MonoBehaviour
     }
     private void OnRunAction(object sender, EventArgs e)
     {
-        Debug.Log("RUNNINGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG");
-        mandraAnimator.SetBool("isWalking", false);
+        Debug.Log("CORRE PERRA CORREEE");
+        //mandraAnimator.SetBool("isWalking", false);
         Vector2 inputVector = gameInput.GetMovementVector();
         bool ShouldRun = inputVector != Vector2.zero && moveSpeed > 0.0f;
-        mandraAnimator.SetBool("isRunning", ShouldRun);
+        //mandraAnimator.SetBool("isRunning", ShouldRun);
         if (ShouldRun)
         {
             moveSpeed *= 2.0f;
@@ -125,33 +125,32 @@ public class PlayerController : MonoBehaviour
 
     private void OnRunCanceled(object sender, EventArgs e)
     {
-        Debug.Log("STOPPED RUNNING");
-        mandraAnimator.SetBool("isRunning", false);
+        Debug.Log("Paraste de correr perra");
+        //mandraAnimator.SetBool("isRunning", false);
         moveSpeed = isRunning ? moveSpeed / 2.0f : moveSpeed;
         isRunning = false;
-        // Your code to handle the Run key being released
     }
 
     private void OnGameOver(object sender, EventArgs e)
     {
-        Debug.Log("GAME OVEEEEEEEEEEEEEEEEEEEEEEEEEEEER");
-        mandraAnimator.SetBool("isDead", true);
+        Debug.Log("perdiste sapo");
+        //mandraAnimator.SetBool("isDead", true);
     }
 
     private void OnVictory(object sender, EventArgs e)
     {
-        Debug.Log("WOOOOOOOOOOOOOOOOOOOOOOOOOOOON");
-        mandraAnimator.SetBool("isAttacking", true);
+        //Debug.Log("loco what ganaste");
+        //mandraAnimator.SetBool("isAttacking", true);
     }
 
-    public Transform GetEggNewTransform()
+    public Transform GetSeedNewTransform()
     {
         return playerPickPoint;
     }
 
 
 
-    public bool HasEgg()
+    public bool HasSeed()
     {
         return pickedSeed != null;
     }

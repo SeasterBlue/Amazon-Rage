@@ -12,23 +12,22 @@ public class Seed : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") && !player.HasEgg())
+        if (other.CompareTag("Player") && !player.HasSeed())
         {
             player.pickedSeed = this;
-            SetEggParent(player);
-        }
-        else if (other.CompareTag("Player") && player.HasEgg())
+            SetSeedParent(player);
+        }else if (other.CompareTag("Player") && player.HasSeed())
         {
-            Debug.Log("You can only have one egg at a time");
+            Debug.Log("Ya la tienes prra");
         }
     }
 
-    public void SetEggParent(PlayerController player)
+    public void SetSeedParent(PlayerController player)
     {
-        transform.parent = player.GetEggNewTransform();
+        transform.parent = player.GetSeedNewTransform();
         transform.localPosition = Vector3.zero;
     }
-    public void RemoveEggParent()
+    public void RemoveSeedParent()
     {
         transform.parent = null;
     }
