@@ -12,10 +12,6 @@ public class GameManager : MonoBehaviour
         get { return instance; }
     }
 
-    public event EventHandler GameOver;
-    public event EventHandler Victory;
-    public event EventHandler SeedPicked;
-
     [SerializeField] private float timerDurationInMinutes = 5f;
     private bool victoryTriggered = false;
 
@@ -63,17 +59,17 @@ public class GameManager : MonoBehaviour
 
     private void OnGameOver()
     {
-        GameOver?.Invoke(this, EventArgs.Empty);
+        
     }
 
     private void OnVictory()
     {
-        Victory?.Invoke(this, EventArgs.Empty);
+        
     }
 
     public void OnSeedPicked()
     {
-        SeedPicked?.Invoke(this, EventArgs.Empty);
+        
     }
 
 
