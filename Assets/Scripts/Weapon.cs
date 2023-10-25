@@ -2,17 +2,62 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
+[RequireComponent (typeof(Collider))]
 public class Weapon : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public int damage;
+    [SerializeField] private string tarjetTag;
+    [SerializeField] private AudioSource sfx;
+
+    private Lumberjack enemy;
+    private PlayerController player;
+    // private Collider collider;
+    // private bool attacking;
+
+    private void Start()
     {
-        
+        // collider = GetComponent<Collider>();
+        sfx = GetComponent<AudioSource>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter(Collider other)
     {
-        
+        // attacking = true;
+        Attacking(other);
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        // attacking = false;
+    }
+
+    public void Attacking(Collider other)
+    {
+        if (other.CompareTag(tarjetTag))
+        {
+            if (tarjetTag == "Enemy")
+            {
+                enemy = other.gameObject.GetComponent<Lumberjack>();
+                enemy.RecieveDamage(damage);
+            } else {
+                player = other.gameObject.GetComponent<PlayerController>();
+                player.RecieveDamage(damage);
+            }
+            sfx.Play();
+        }
+    }
+
+    public void Grab()
+    {
+        //
+    }
+    public void Equip()
+    {
+        //
+    }
+    public void Throw()
+    {
+        //
     }
 }
