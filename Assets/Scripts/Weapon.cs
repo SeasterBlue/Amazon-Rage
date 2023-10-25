@@ -13,26 +13,23 @@ public class Weapon : MonoBehaviour
     private Lumberjack enemy;
     private PlayerController player;
     // private Collider collider;
-    public bool attacking;
+    // private bool attacking;
 
     private void Start()
     {
         // collider = GetComponent<Collider>();
-        attacking = false;
         sfx = GetComponent<AudioSource>();
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (attacking)
-        {
-            Attacking(other);
-        }
+        // attacking = true;
+        Attacking(other);
     }
 
     private void OnTriggerExit(Collider other)
     {
-        attacking = false;
+        // attacking = false;
     }
 
     public void Attacking(Collider other)

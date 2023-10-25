@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Scripts/Weapon.cs.meta
+guid: dd30bea27450bbe45aa5be051a147b7f
+========
+guid: 9b4724d1ed9014444aaf6a7841e3f6ab
+>>>>>>>> 7837c316a2e8faaa636e6cf7a3b7f61c90578853:Assets/Scripts/Player/Player2/PlayerController2.cs.meta
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
