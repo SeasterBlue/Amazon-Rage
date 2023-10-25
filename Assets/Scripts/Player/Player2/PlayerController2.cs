@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class PlayerController2 : MonoBehaviour
 {
-    Rigidbody rb;
+    #region int
+    //int lives = 12;
+    #endregion
 
     #region floats
     [SerializeField] float currentSpeed;
@@ -16,14 +18,21 @@ public class PlayerController2 : MonoBehaviour
     #region bools
     private bool isGrounded;
     public bool isRunning = false;
-    private bool isMoving = false;
+    public bool oneArmChopped;
+    public bool twoArmsChopped;
+    public bool headChopped;
     #endregion
 
     #region weirdos
-    private LayerMask groundMask;
-    private Transform playerPickPoint;
+    LayerMask groundMask;
+    Transform playerPickPoint;
+    Transform leftArm;
+    Transform rightArm;
+    Transform head;
+    Transform plantHead;
     public Seed seed;
-    private Animator animator;
+    Rigidbody rb;
+    Animator animator;
     #endregion
 
     void Start()
@@ -31,6 +40,10 @@ public class PlayerController2 : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         groundMask = LayerMask.GetMask("Ground");
         playerPickPoint = GameObject.Find("PickPoint").GetComponent<Transform>();
+        leftArm = GameObject.Find("Bone003").GetComponent<Transform>();
+        rightArm = GameObject.Find("Bone032").GetComponent<Transform>();
+        head = GameObject.Find("Bone018").GetComponent<Transform>();
+        plantHead = GameObject.Find("Bone019").GetComponent<Transform>();
         animator = GetComponent<Animator>();
         
     }
@@ -45,6 +58,13 @@ public class PlayerController2 : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.L))
         {
             seed.RemoveSeedParent();
+        }
+        if(Input.GetKeyDown(KeyCode.X))
+        {
+            if (twoArmsChopped) CutHead();
+            if (oneArmChopped) CutRightArm();
+            CutLeftArm();
+             
         }
     }
 
@@ -82,6 +102,25 @@ public class PlayerController2 : MonoBehaviour
     {
 
         if(isGrounded) rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+    }
+
+    void CutLeftArm()
+    {
+        leftArm.localScale = new Vector3(0.0001f, 0.0001f, 0.0001f);
+        oneArmChopped = true;
+    }
+
+    void CutRightArm()
+    {
+        rightArm.localScale = new Vector3(0.0001f, 0.0001f, 0.0001f);
+        twoArmsChopped = true;
+    }
+
+    void CutHead()
+    {
+        head.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+        plantHead.localScale = new Vector3(7, 7, 7);
+        headChopped = true;
     }
 
     private void DestroySeed() //no usada aun

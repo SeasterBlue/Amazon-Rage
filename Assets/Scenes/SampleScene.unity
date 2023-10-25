@@ -893,6 +893,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentSpeed: 0
+  isRunning: 0
+  oneArmChopped: 0
+  twoArmsChopped: 0
+  headChopped: 0
   seed: {fileID: 0}
 --- !u!54 &1265394337
 Rigidbody:
@@ -1005,7 +1009,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 1968d70c2d19a124e83b677dacdfce35, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1189,9 +1193,29 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1265394330}
     m_Modifications:
+    - target: {fileID: 1260695142761582, guid: 2d8a42d7acb6f6c4f8f3cf0eb63ee259, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1268555301201032, guid: 2d8a42d7acb6f6c4f8f3cf0eb63ee259, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1618424574176686, guid: 2d8a42d7acb6f6c4f8f3cf0eb63ee259, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1713670787350220, guid: 2d8a42d7acb6f6c4f8f3cf0eb63ee259, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1821921144903594, guid: 2d8a42d7acb6f6c4f8f3cf0eb63ee259, type: 3}
       propertyPath: m_Name
       value: MandrakeLowPoly
+      objectReference: {fileID: 0}
+    - target: {fileID: 4400234380263246, guid: 2d8a42d7acb6f6c4f8f3cf0eb63ee259, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4401109583381184, guid: 2d8a42d7acb6f6c4f8f3cf0eb63ee259, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1232,6 +1256,14 @@ PrefabInstance:
     - target: {fileID: 4401109583381184, guid: 2d8a42d7acb6f6c4f8f3cf0eb63ee259, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4671734583648362, guid: 2d8a42d7acb6f6c4f8f3cf0eb63ee259, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4786153412190624, guid: 2d8a42d7acb6f6c4f8f3cf0eb63ee259, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
