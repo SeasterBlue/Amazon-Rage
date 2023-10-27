@@ -1737,6 +1737,11 @@ PrefabInstance:
       propertyPath: m_Convex
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 64361824722743508, guid: c472a7c3f85525f4c98177cf92fa98de,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4110,7 +4115,7 @@ GameObject:
   - component: {fileID: 849113325}
   - component: {fileID: 849113324}
   - component: {fileID: 849113323}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Terrain 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7029,8 +7034,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1356545831}
   - component: {fileID: 1356545830}
-  - component: {fileID: 1356545829}
   - component: {fileID: 1356545828}
+  - component: {fileID: 1356545832}
   m_Layer: 0
   m_Name: WaterDirt
   m_TagString: Untagged
@@ -7080,28 +7085,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &1356545829
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1356545827}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!33 &1356545830
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -7125,6 +7108,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 116031250}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1356545832
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1356545827}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 10, y: 2.2204459e-16, z: 9.999999}
+  m_Center: {x: 0, y: 0.000000029802322, z: 0}
 --- !u!1001 &1373226599
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7199,22 +7203,7 @@ PrefabInstance:
     - target: {fileID: 531979564364844238, guid: bd4940879afee5e42a3296d63f7809f7,
         type: 3}
       propertyPath: m_UseGravity
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 835864520579887535, guid: bd4940879afee5e42a3296d63f7809f7,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.27
-      objectReference: {fileID: 0}
-    - target: {fileID: 835864520579887535, guid: bd4940879afee5e42a3296d63f7809f7,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.27
-      objectReference: {fileID: 0}
-    - target: {fileID: 835864520579887535, guid: bd4940879afee5e42a3296d63f7809f7,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.27
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 835864520579887535, guid: bd4940879afee5e42a3296d63f7809f7,
         type: 3}
@@ -7265,11 +7254,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5301129154961091893, guid: bd4940879afee5e42a3296d63f7809f7,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6028999721305781729, guid: bd4940879afee5e42a3296d63f7809f7,
         type: 3}
