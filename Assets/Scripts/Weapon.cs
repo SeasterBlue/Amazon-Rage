@@ -10,8 +10,8 @@ public class Weapon : MonoBehaviour
     [SerializeField] private string tarjetTag;
     [SerializeField] private AudioSource sfx;
 
-    private Lumberjack enemy;
-    private PlayerController player;
+    //private Lumberjack enemy;
+    private PlayerController2 player;
     // private Collider collider;
     // private bool attacking;
 
@@ -38,11 +38,11 @@ public class Weapon : MonoBehaviour
         {
             if (tarjetTag == "Enemy")
             {
-                enemy = other.gameObject.GetComponent<Lumberjack>();
-                enemy.RecieveDamage(damage);
+                //enemy = other.gameObject.GetComponent<Lumberjack>();
+                //enemy.RecieveDamage(damage);
             } else {
-                player = other.gameObject.GetComponent<PlayerController>();
-                player.RecieveDamage(damage);
+                player = other.gameObject.GetComponent<PlayerController2>();
+                //player.RecieveDamage(damage);
             }
             sfx.Play();
         }

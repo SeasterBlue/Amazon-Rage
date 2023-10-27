@@ -4,24 +4,35 @@ using UnityEngine;
 
 public class PlayerController2 : MonoBehaviour
 {
-    Rigidbody rb;
+    #region int
+    //int lives = 12;
+    #endregion
 
     #region floats
-    [SerializeField] private float currentSpeed;
-    private float rotationSpeed = 5.0f;
-    private float jumpForce = 6.0f;
+    [SerializeField] float currentSpeed;
+    float rotationSpeed = 5.0f;
+    float jumpForce = 6.0f;
     float groundDistance = 0.4f;
     #endregion
 
     #region bools
     private bool isGrounded;
-    private bool isRunning = false;
+    public bool isRunning = false;
+    public bool oneArmChopped;
+    public bool twoArmsChopped;
+    public bool headChopped;
     #endregion
 
     #region weirdos
-    private LayerMask groundMask;
-    private Transform playerPickPoint;
+    LayerMask groundMask;
+    Transform playerPickPoint;
+    Transform leftArm;
+    Transform rightArm;
+    Transform head;
+    Transform plantHead;
     public Seed seed;
+    Rigidbody rb;
+    Animator animator;
     #endregion
 
     void Start()
@@ -29,23 +40,17 @@ public class PlayerController2 : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         groundMask = LayerMask.GetMask("Ground");
         playerPickPoint = GameObject.Find("PickPoint").GetComponent<Transform>();
+        leftArm = GameObject.Find("Bone003").GetComponent<Transform>();
+        rightArm = GameObject.Find("Bone032").GetComponent<Transform>();
+        head = GameObject.Find("Bone018").GetComponent<Transform>();
+        plantHead = GameObject.Find("Bone019").GetComponent<Transform>();
+        animator = GetComponent<Animator>();
         
     }
 
     private void Update()
     {
         CheckIfGrounded();
-    }
-
-    // Update is called once per frame
-    void FixedUpdate()
-    {
-        currentSpeed = Input.GetKey(KeyCode.LeftShift) ? 10.0f : 5.0f;
-        isRunning = currentSpeed == 10.0f;
-        
-        HandleMovement(currentSpeed);
-
-
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             HandleJump();
@@ -54,18 +59,42 @@ public class PlayerController2 : MonoBehaviour
         {
             seed.RemoveSeedParent();
         }
+        if(Input.GetKeyDown(KeyCode.X))
+        {
+            if (twoArmsChopped) CutHead();
+            if (oneArmChopped) CutRightArm();
+            CutLeftArm();
+             
+        }
+    }
+
+    // Update is called once per frame
+    void FixedUpdate()
+    {
+        currentSpeed = Input.GetKey(KeyCode.LeftShift) ? 10.0f : 5.0f;
+        isRunning = currentSpeed == 10.0f;
+
+        HandleMovement(currentSpeed);
+
+        
+       
     }
 
     void HandleMovement(float moveSpeed)
     {
 
         Vector2 inputVector = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        bool isMoving = inputVector != Vector2.zero;
+
+        animator.SetBool("isWalking", isMoving && !isRunning);
+        animator.SetBool("isRunning", isRunning);
+
+        //
         Vector3 moveDirection = new(inputVector.x, 0.0f, inputVector.y);
         float moveDistance = moveSpeed * Time.deltaTime;
 
-         transform.position += moveDirection * moveDistance;
-       
-
+        //Movement
+        transform.position += moveDirection * moveDistance;
         transform.forward = Vector3.Slerp(transform.forward, moveDirection, Time.deltaTime * rotationSpeed);
     }
 
@@ -73,6 +102,25 @@ public class PlayerController2 : MonoBehaviour
     {
 
         if(isGrounded) rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+    }
+
+    void CutLeftArm()
+    {
+        leftArm.localScale = new Vector3(0.0001f, 0.0001f, 0.0001f);
+        oneArmChopped = true;
+    }
+
+    void CutRightArm()
+    {
+        rightArm.localScale = new Vector3(0.0001f, 0.0001f, 0.0001f);
+        twoArmsChopped = true;
+    }
+
+    void CutHead()
+    {
+        head.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+        plantHead.localScale = new Vector3(7, 7, 7);
+        headChopped = true;
     }
 
     private void DestroySeed() //no usada aun
