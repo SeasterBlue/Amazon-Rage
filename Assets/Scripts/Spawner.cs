@@ -17,7 +17,7 @@ public class Spawner : MonoBehaviour
     {
         if (UnityEngine.Input.GetKeyDown(KeyCode.Space))
         {
-            objectPool.Spawn<Lumberjack>(Vector3.zero, Quaternion.identity);
+            objectPool.Spawn<Lumberjack>(new Vector3(78.37f, -114.21f, 68.48f), Quaternion.identity);
         }
     }
 }
