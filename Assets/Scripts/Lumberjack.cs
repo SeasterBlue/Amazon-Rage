@@ -30,7 +30,6 @@ public class Lumberjack : RecyclableObject
         if(other.gameObject.CompareTag("Player"))
         {
             navAgent.isStopped = false;
-            //navAgent.updateRotation = true;
             animator.SetBool("walking", true);
         }
     }
@@ -54,8 +53,12 @@ public class Lumberjack : RecyclableObject
         {
             navAgent.destination = transform.position;
             navAgent.isStopped = true;
-            //navAgent.updateRotation = false;
             animator.SetBool("walking", false);
         }
+    }
+
+    private void Attack()
+    {
+        Debug.Log("Lumberjack attack");
     }
 }
