@@ -28,6 +28,8 @@ public class PlayerController2 : MonoBehaviour
     Transform playerPickPoint;
     Transform leftArm;
     Transform rightArm;
+    Transform rightHand;
+    Transform leftHand;
     Transform head;
     Transform plantHead;
     public Seed seed;
@@ -38,10 +40,13 @@ public class PlayerController2 : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+
         groundMask = LayerMask.GetMask("Ground");
         playerPickPoint = GameObject.Find("PickPoint").GetComponent<Transform>();
         leftArm = GameObject.Find("Bone003").GetComponent<Transform>();
+        leftHand = GameObject.Find("Bone010").GetComponent<Transform>();
         rightArm = GameObject.Find("Bone032").GetComponent<Transform>();
+        rightHand = GameObject.Find("Bone033").GetComponent<Transform>();
         head = GameObject.Find("Bone018").GetComponent<Transform>();
         plantHead = GameObject.Find("Bone019").GetComponent<Transform>();
         animator = GetComponent<Animator>();
@@ -152,5 +157,28 @@ public class PlayerController2 : MonoBehaviour
     public Transform GetSeedNewTransform()
     {
         return playerPickPoint;
+    }
+
+    public Transform GetMacheteNewTransform()
+    {
+        return leftHand;
+    }
+
+    public Transform GetGunsawNewTransform()
+    {
+        return rightHand;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Machete"))
+        {
+            other.transform.parent = GetMacheteNewTransform();
+            //other.transform.localPosition = Vector3.zero;
+            other.transform.localPosition = leftHand.transform.localPosition + new Vector3(0,0.12f,0);
+            other.transform.localRotation = leftHand.transform.localRotation * Quaternion.Euler(0, 0, 1);
+
+
+        }
     }
 }
