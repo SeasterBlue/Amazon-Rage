@@ -10,13 +10,13 @@ public class Seed : MonoBehaviour
     }
 
 
-    private void OnCollisionEnter(Collision other)
+    private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player") && !player.HasSeed())
+        if (other.CompareTag("Player") && !player.HasSeed())
         {
             player.seed = this;
             SetSeedParent(player);
-        }   else if (other.gameObject.CompareTag("Player") && player.HasSeed())
+        }   else if (other.CompareTag("Player") && player.HasSeed())
         {
             Debug.Log("Ya la tienes prra");
         }
