@@ -12,12 +12,18 @@ public class Lumberjack : RecyclableObject
 
     internal override void Init()
     {
+        
         health = 100;
         Invoke(nameof(Recycle), 15);
         if(navAgent == null)
+        {
             navAgent = GetComponent<NavMeshAgent>();
+            navAgent.updateUpAxis = false;
+            navAgent.updateRotation = false;
+        }
         if(animator == null)
             animator = GetComponent<Animator>();
+
     }
 
     internal override void Release()
