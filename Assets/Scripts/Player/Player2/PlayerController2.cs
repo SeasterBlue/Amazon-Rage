@@ -30,11 +30,12 @@ public class PlayerController2 : MonoBehaviour
     LayerMask groundMask;
     Transform playerPickPoint;
     Transform leftArm;
-    Transform leftHand;
+    Transform gunPoint;
     Transform rightArm;
     Transform rightHand;
     Transform head;
     Transform plantHead;
+    GameObject machete;
     public Seed seed;
     Rigidbody rb;
     Animator animator;
@@ -47,7 +48,8 @@ public class PlayerController2 : MonoBehaviour
         groundMask = LayerMask.GetMask("Ground");
         playerPickPoint = GameObject.Find("PickPoint").GetComponent<Transform>();
         leftArm = GameObject.Find("Bone003").GetComponent<Transform>();
-        leftHand = GameObject.Find("Bone010").GetComponent<Transform>();
+        machete = GameObject.Find("Machete").GetComponent<GameObject>();
+        gunPoint = GameObject.Find("GunPoint").GetComponent<Transform>();
         rightArm = GameObject.Find("Bone032").GetComponent<Transform>();
         rightHand = GameObject.Find("Bone029").GetComponent<Transform>();
         head = GameObject.Find("Bone018").GetComponent<Transform>();
@@ -68,7 +70,8 @@ public class PlayerController2 : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            animator.SetTrigger("isAttacking");
+            if(!hasChainSaw && !hasMachete) animator.SetTrigger("isHeadAttack");
+            else animator.SetTrigger("isAttacking");
 
         }
 
@@ -172,15 +175,7 @@ public class PlayerController2 : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Chainsaw"))
-        {
-            Quaternion offsetChainSawRotation = Quaternion.Euler(45, -100, 110);
-            other.transform.parent = GetGunsawNewTransform();
-            other.transform.localPosition = Vector3.zero;
-            other.transform.localRotation = offsetChainSawRotation; 
-            hasChainSaw = true;
-        }
-        if (other.CompareTag("Machete"))
+        if (other.CompareTag("Machete") && !hasChainSaw)
         {
             Vector3 offsetMachete = new Vector3(-0.086f, 0.21f, -0.005f);
             Quaternion offsetMacheteRotation = Quaternion.Euler(100, -57, 292);
@@ -189,6 +184,47 @@ public class PlayerController2 : MonoBehaviour
             other.transform.localRotation = offsetMacheteRotation;
             hasMachete = true;
         }
+        else if (other.CompareTag("Machete") && hasChainSaw)
+        {
+            other.transform.parent = GetGunPointTransform();
+            other.transform.localPosition = Vector3.zero;
+            other.transform.localRotation = Quaternion.Euler(0,90,0);
+            other.transform.localScale = other.transform.localScale - new Vector3(0.5f, 0.5f, 0.5f);
+            hasMachete = true;
+        }
+
+        if (other.CompareTag("Chainsaw") && !hasMachete)
+        {
+            Quaternion offsetChainSawRotation = Quaternion.Euler(45, -100, 110);
+            other.transform.parent = GetGunsawNewTransform();
+            other.transform.localPosition = Vector3.zero;
+            other.transform.localRotation = offsetChainSawRotation; 
+            hasChainSaw = true;
+        }
+        else if (other.CompareTag("Chainsaw") && hasMachete)
+        {
+            Quaternion offsetChainSawRotation = Quaternion.Euler(45, -100, 110);
+            other.transform.parent = GetGunsawNewTransform();
+            other.transform.localPosition = Vector3.zero;
+            other.transform.localRotation = offsetChainSawRotation;
+            hasChainSaw = true;
+
+            machete.transform.parent = GetGunPointTransform();
+            machete.transform.localPosition = Vector3.zero;
+            machete.transform.localRotation = Quaternion.Euler(0, 90, 0);
+            machete.transform.localScale = other.transform.localScale - new Vector3(0.5f, 0.5f, 0.5f);
+            hasMachete = true;
+
+
+
+        }
+
+
+
+
+
+
+
 
     }
 
@@ -206,6 +242,12 @@ public class PlayerController2 : MonoBehaviour
     {
         return rightHand;
     }
+
+    public Transform GetGunPointTransform()
+    {
+        return gunPoint;
+    }
+
 
     public void RecieveDamage(int damage)
     {
