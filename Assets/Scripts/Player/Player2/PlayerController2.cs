@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController2 : MonoBehaviour
 {
     #region int
-    //int lives = 12;
+    int health = 50;
     #endregion
 
     #region floats
@@ -33,6 +34,7 @@ public class PlayerController2 : MonoBehaviour
     public Seed seed;
     Rigidbody rb;
     Animator animator;
+    GameManager gameManager;
     #endregion
 
     void Start()
@@ -45,6 +47,7 @@ public class PlayerController2 : MonoBehaviour
         head = GameObject.Find("Bone018").GetComponent<Transform>();
         plantHead = GameObject.Find("Bone019").GetComponent<Transform>();
         animator = GetComponent<Animator>();
+        gameManager= FindObjectOfType<GameManager>().GetComponent<GameManager>();
         
     }
 
@@ -59,16 +62,15 @@ public class PlayerController2 : MonoBehaviour
         {
             seed.RemoveSeedParent();
         }
-        if(Input.GetKeyDown(KeyCode.X))
-        {
-            if (twoArmsChopped) CutHead();
-            if (oneArmChopped) CutRightArm();
-            CutLeftArm();
-             
-        }
+
+        //if(Input.GetKeyDown(KeyCode.X))
+        //{
+        //    if (twoArmsChopped) CutHead();
+        //    if (oneArmChopped) CutRightArm();
+        //    CutLeftArm();
+        //}
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
         currentSpeed = Input.GetKey(KeyCode.LeftShift) ? 10.0f : 5.0f;
@@ -76,8 +78,13 @@ public class PlayerController2 : MonoBehaviour
 
         HandleMovement(currentSpeed);
 
-        
+        Attack();
        
+    }
+
+    void Attack()
+    {
+        // On Click
     }
 
     void HandleMovement(float moveSpeed)
@@ -152,5 +159,19 @@ public class PlayerController2 : MonoBehaviour
     public Transform GetSeedNewTransform()
     {
         return playerPickPoint;
+    }
+
+    public void RecieveDamage(int damage)
+    {
+        health-=damage;
+
+        // CHECK LATER FOR ODD BEHAVIORS
+        if (health < 35) CutLeftArm();
+        if (health < 20 && oneArmChopped) CutRightArm();
+        if (health <= 0 && twoArmsChopped)
+        {
+            CutHead();
+            gameManager.OnGameOver();
+        }
     }
 }

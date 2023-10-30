@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using static Cinemachine.DocumentationSortingAttribute;
 
 [RequireComponent(typeof(Rigidbody), typeof(Collider), typeof(NavMeshAgent))]
 public class Lumberjack : RecyclableObject
@@ -66,5 +67,15 @@ public class Lumberjack : RecyclableObject
     private void Attack()
     {
         Debug.Log("Lumberjack attack");
+    }
+
+    public void RecieveDamage(int damage)
+    {
+        health -= damage;
+        if (health <= 0)
+        {
+            // ANIMATION AND SOUND OF DEAD
+            Destroy(gameObject);
+        }
     }
 }
