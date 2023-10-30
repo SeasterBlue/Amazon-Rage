@@ -28,7 +28,10 @@ public class Weapon : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (attacking == true) Attacking(other);
+
     }
+
+
 
     private void OnTriggerExit(Collider other)
     {

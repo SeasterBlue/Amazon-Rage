@@ -22,15 +22,20 @@ public class PlayerController2 : MonoBehaviour
     public bool oneArmChopped;
     public bool twoArmsChopped;
     public bool headChopped;
+    public bool hasChainSaw;
+    public bool hasMachete;
     #endregion
 
     #region weirdos
     LayerMask groundMask;
     Transform playerPickPoint;
     Transform leftArm;
+    Transform gunPoint;
     Transform rightArm;
+    Transform rightHand;
     Transform head;
     Transform plantHead;
+    Transform machete;
     public Seed seed;
     Rigidbody rb;
     Animator animator;
@@ -43,7 +48,10 @@ public class PlayerController2 : MonoBehaviour
         groundMask = LayerMask.GetMask("Ground");
         playerPickPoint = GameObject.Find("PickPoint").GetComponent<Transform>();
         leftArm = GameObject.Find("Bone003").GetComponent<Transform>();
+        machete = GameObject.Find("Machete").GetComponent<Transform>();
+        gunPoint = GameObject.Find("GunPoint").GetComponent<Transform>();
         rightArm = GameObject.Find("Bone032").GetComponent<Transform>();
+        rightHand = GameObject.Find("Bone029").GetComponent<Transform>();
         head = GameObject.Find("Bone018").GetComponent<Transform>();
         plantHead = GameObject.Find("Bone019").GetComponent<Transform>();
         animator = GetComponent<Animator>();
@@ -58,6 +66,19 @@ public class PlayerController2 : MonoBehaviour
         {
             HandleJump();
         }
+
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            if(!hasChainSaw && !hasMachete) animator.SetTrigger("isHeadAttack");
+            if (hasChainSaw) animator.SetTrigger("AttackGunsaw");
+            if (!hasChainSaw && hasMachete) animator.SetTrigger("isAttacking");
+            
+
+        }
+
+       
+
         if (Input.GetKeyDown(KeyCode.L))
         {
             seed.RemoveSeedParent();
@@ -77,14 +98,13 @@ public class PlayerController2 : MonoBehaviour
         isRunning = currentSpeed == 10.0f;
 
         HandleMovement(currentSpeed);
-
-        Attack();
+        
        
     }
 
     void Attack()
     {
-        // On Click
+        
     }
 
     void HandleMovement(float moveSpeed)
@@ -155,11 +175,89 @@ public class PlayerController2 : MonoBehaviour
         return seed != null;
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Machete") && !hasChainSaw)
+        {
+            GiveMacheteWithoutChainSaw(other);
+        }
+        else if (other.CompareTag("Machete") && hasChainSaw)
+        {
+            PutMacheteAfterChainsaw(other);
+        }
+
+        if (other.CompareTag("Chainsaw") && !hasMachete)
+        {
+            GiveChainSawWithoutMachete(other);
+        }
+        else if (other.CompareTag("Chainsaw") && hasMachete)
+        {
+            ReplaceMacheteWithChainSaw(other);
+
+        }
+
+    }
+
+    void GiveMacheteWithoutChainSaw(Collider other)
+    {
+        Vector3 offsetMachete = new Vector3(-0.086f, 0.21f, -0.005f);
+        Quaternion offsetMacheteRotation = Quaternion.Euler(100, -57, 292);
+        other.transform.parent = GetMacheteNewTransform();
+        other.transform.localPosition = offsetMachete;
+        other.transform.localRotation = offsetMacheteRotation;
+        hasMachete = true;
+    }
+    void PutMacheteAfterChainsaw(Collider other)
+    {
+        other.transform.parent = GetGunPointTransform();
+        other.transform.localPosition = Vector3.zero;
+        other.transform.localRotation = Quaternion.Euler(0, 90, 0);
+        other.transform.localScale = other.transform.localScale - new Vector3(0.5f, 0.5f, 0.5f);
+        hasMachete = true;
+    }
+    void GiveChainSawWithoutMachete(Collider other)
+    {
+        Quaternion offsetChainSawRotation = Quaternion.Euler(45, -100, 110);
+        other.transform.parent = GetGunsawNewTransform();
+        other.transform.localPosition = Vector3.zero;
+        other.transform.localRotation = offsetChainSawRotation;
+        hasChainSaw = true;
+    }
+    void ReplaceMacheteWithChainSaw(Collider other )
+    {
+        Quaternion offsetChainSawRotation = Quaternion.Euler(45, -100, 110);
+        other.transform.parent = GetGunsawNewTransform();
+        other.transform.localPosition = Vector3.zero;
+        other.transform.localRotation = offsetChainSawRotation;
+        hasChainSaw = true;
+
+        machete.transform.parent = GetGunPointTransform();
+        machete.transform.localPosition = Vector3.zero;
+        machete.transform.localRotation = Quaternion.Euler(0, 90, 0);
+        //machete.transform.localScale = other.transform.localScale - new Vector3(0.25f, 0.25f, 0.25f);
+        hasMachete = true;
+    }
+
 
     public Transform GetSeedNewTransform()
     {
         return playerPickPoint;
     }
+
+    public Transform GetMacheteNewTransform()
+    {
+        return rightHand;
+    }
+    public Transform GetGunsawNewTransform()
+    {
+        return rightHand;
+    }
+
+    public Transform GetGunPointTransform()
+    {
+        return gunPoint;
+    }
+
 
     public void RecieveDamage(int damage)
     {

@@ -4,6 +4,7 @@ using UnityEngine;
 public class Seed : MonoBehaviour
 {
     private PlayerController2 player;
+
     private void Awake()
     {
         player = FindObjectOfType<PlayerController2>();
@@ -22,6 +23,8 @@ public class Seed : MonoBehaviour
         }
     }
 
+
+
     public void SetSeedParent(PlayerController2 player)
     {
         transform.parent = player.GetSeedNewTransform();
@@ -34,6 +37,7 @@ public class Seed : MonoBehaviour
         transform.parent = null;
         
     }
+
 
 
 
