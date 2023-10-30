@@ -35,7 +35,7 @@ public class PlayerController2 : MonoBehaviour
     Transform rightHand;
     Transform head;
     Transform plantHead;
-    GameObject machete;
+    Transform machete;
     public Seed seed;
     Rigidbody rb;
     Animator animator;
@@ -48,7 +48,7 @@ public class PlayerController2 : MonoBehaviour
         groundMask = LayerMask.GetMask("Ground");
         playerPickPoint = GameObject.Find("PickPoint").GetComponent<Transform>();
         leftArm = GameObject.Find("Bone003").GetComponent<Transform>();
-        machete = GameObject.Find("Machete").GetComponent<GameObject>();
+        machete = GameObject.Find("Machete").GetComponent<Transform>();
         gunPoint = GameObject.Find("GunPoint").GetComponent<Transform>();
         rightArm = GameObject.Find("Bone032").GetComponent<Transform>();
         rightHand = GameObject.Find("Bone029").GetComponent<Transform>();
@@ -177,55 +177,63 @@ public class PlayerController2 : MonoBehaviour
     {
         if (other.CompareTag("Machete") && !hasChainSaw)
         {
-            Vector3 offsetMachete = new Vector3(-0.086f, 0.21f, -0.005f);
-            Quaternion offsetMacheteRotation = Quaternion.Euler(100, -57, 292);
-            other.transform.parent = GetMacheteNewTransform();
-            other.transform.localPosition = offsetMachete;
-            other.transform.localRotation = offsetMacheteRotation;
-            hasMachete = true;
+            GiveMacheteWithoutChainSaw(other);
         }
         else if (other.CompareTag("Machete") && hasChainSaw)
         {
-            other.transform.parent = GetGunPointTransform();
-            other.transform.localPosition = Vector3.zero;
-            other.transform.localRotation = Quaternion.Euler(0,90,0);
-            other.transform.localScale = other.transform.localScale - new Vector3(0.5f, 0.5f, 0.5f);
-            hasMachete = true;
+            PutMacheteAfterChainsaw(other);
         }
 
         if (other.CompareTag("Chainsaw") && !hasMachete)
         {
-            Quaternion offsetChainSawRotation = Quaternion.Euler(45, -100, 110);
-            other.transform.parent = GetGunsawNewTransform();
-            other.transform.localPosition = Vector3.zero;
-            other.transform.localRotation = offsetChainSawRotation; 
-            hasChainSaw = true;
+            GiveChainSawWithoutMachete(other);
         }
         else if (other.CompareTag("Chainsaw") && hasMachete)
         {
-            Quaternion offsetChainSawRotation = Quaternion.Euler(45, -100, 110);
-            other.transform.parent = GetGunsawNewTransform();
-            other.transform.localPosition = Vector3.zero;
-            other.transform.localRotation = offsetChainSawRotation;
-            hasChainSaw = true;
-
-            machete.transform.parent = GetGunPointTransform();
-            machete.transform.localPosition = Vector3.zero;
-            machete.transform.localRotation = Quaternion.Euler(0, 90, 0);
-            machete.transform.localScale = other.transform.localScale - new Vector3(0.5f, 0.5f, 0.5f);
-            hasMachete = true;
-
-
+            ReplaceMacheteWithChainSaw(other);
 
         }
 
+    }
 
+    void GiveMacheteWithoutChainSaw(Collider other)
+    {
+        Vector3 offsetMachete = new Vector3(-0.086f, 0.21f, -0.005f);
+        Quaternion offsetMacheteRotation = Quaternion.Euler(100, -57, 292);
+        other.transform.parent = GetMacheteNewTransform();
+        other.transform.localPosition = offsetMachete;
+        other.transform.localRotation = offsetMacheteRotation;
+        hasMachete = true;
+    }
+    void PutMacheteAfterChainsaw(Collider other)
+    {
+        other.transform.parent = GetGunPointTransform();
+        other.transform.localPosition = Vector3.zero;
+        other.transform.localRotation = Quaternion.Euler(0, 90, 0);
+        other.transform.localScale = other.transform.localScale - new Vector3(0.5f, 0.5f, 0.5f);
+        hasMachete = true;
+    }
+    void GiveChainSawWithoutMachete(Collider other)
+    {
+        Quaternion offsetChainSawRotation = Quaternion.Euler(45, -100, 110);
+        other.transform.parent = GetGunsawNewTransform();
+        other.transform.localPosition = Vector3.zero;
+        other.transform.localRotation = offsetChainSawRotation;
+        hasChainSaw = true;
+    }
+    void ReplaceMacheteWithChainSaw(Collider other )
+    {
+        Quaternion offsetChainSawRotation = Quaternion.Euler(45, -100, 110);
+        other.transform.parent = GetGunsawNewTransform();
+        other.transform.localPosition = Vector3.zero;
+        other.transform.localRotation = offsetChainSawRotation;
+        hasChainSaw = true;
 
-
-
-
-
-
+        machete.transform.parent = GetGunPointTransform();
+        machete.transform.localPosition = Vector3.zero;
+        machete.transform.localRotation = Quaternion.Euler(0, 90, 0);
+        //machete.transform.localScale = other.transform.localScale - new Vector3(0.25f, 0.25f, 0.25f);
+        hasMachete = true;
     }
 
 
