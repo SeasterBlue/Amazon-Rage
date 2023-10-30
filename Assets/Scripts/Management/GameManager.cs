@@ -57,9 +57,10 @@ public class GameManager : MonoBehaviour
         OnGameOver();
     }
 
-    private void OnGameOver()
+    public void OnGameOver()
     {
-        
+        // Display animation,  UI and button to restart
+        Debug.Log("Game Over");
     }
 
     private void OnVictory()

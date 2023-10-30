@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(AudioSource))]
@@ -10,26 +11,28 @@ public class Weapon : MonoBehaviour
     [SerializeField] private string tarjetTag;
     [SerializeField] private AudioSource sfx;
 
-    //private Lumberjack enemy;
+    private Lumberjack enemy;
     private PlayerController2 player;
     // private Collider collider;
-    // private bool attacking;
+    private Rigidbody rb;
+    public bool attacking;
 
     private void Start()
     {
         // collider = GetComponent<Collider>();
         sfx = GetComponent<AudioSource>();
+        rb= GetComponent<Rigidbody>();
+        attacking = false;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        // attacking = true;
-        Attacking(other);
+        if (attacking == true) Attacking(other);
     }
 
     private void OnTriggerExit(Collider other)
     {
-        // attacking = false;
+        attacking = false;
     }
 
     public void Attacking(Collider other)
@@ -38,11 +41,11 @@ public class Weapon : MonoBehaviour
         {
             if (tarjetTag == "Enemy")
             {
-                //enemy = other.gameObject.GetComponent<Lumberjack>();
-                //enemy.RecieveDamage(damage);
+                enemy = other.gameObject.GetComponent<Lumberjack>();
+                enemy.RecieveDamage(damage);
             } else {
                 player = other.gameObject.GetComponent<PlayerController2>();
-                //player.RecieveDamage(damage);
+                player.RecieveDamage(damage);
             }
             sfx.Play();
         }
