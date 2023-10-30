@@ -71,7 +71,9 @@ public class PlayerController2 : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             if(!hasChainSaw && !hasMachete) animator.SetTrigger("isHeadAttack");
-            else animator.SetTrigger("isAttacking");
+            if (hasChainSaw) animator.SetTrigger("AttackGunsaw");
+            if (!hasChainSaw && hasMachete) animator.SetTrigger("isAttacking");
+            
 
         }
 
