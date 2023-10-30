@@ -22,13 +22,17 @@ public class PlayerController2 : MonoBehaviour
     public bool oneArmChopped;
     public bool twoArmsChopped;
     public bool headChopped;
+    public bool hasChainSaw;
+    public bool hasMachete;
     #endregion
 
     #region weirdos
     LayerMask groundMask;
     Transform playerPickPoint;
     Transform leftArm;
+    Transform leftHand;
     Transform rightArm;
+    Transform rightHand;
     Transform head;
     Transform plantHead;
     public Seed seed;
@@ -43,7 +47,9 @@ public class PlayerController2 : MonoBehaviour
         groundMask = LayerMask.GetMask("Ground");
         playerPickPoint = GameObject.Find("PickPoint").GetComponent<Transform>();
         leftArm = GameObject.Find("Bone003").GetComponent<Transform>();
+        leftHand = GameObject.Find("Bone010").GetComponent<Transform>();
         rightArm = GameObject.Find("Bone032").GetComponent<Transform>();
+        rightHand = GameObject.Find("Bone029").GetComponent<Transform>();
         head = GameObject.Find("Bone018").GetComponent<Transform>();
         plantHead = GameObject.Find("Bone019").GetComponent<Transform>();
         animator = GetComponent<Animator>();
@@ -58,6 +64,16 @@ public class PlayerController2 : MonoBehaviour
         {
             HandleJump();
         }
+
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            animator.SetTrigger("isAttacking");
+
+        }
+
+       
+
         if (Input.GetKeyDown(KeyCode.L))
         {
             seed.RemoveSeedParent();
@@ -77,14 +93,13 @@ public class PlayerController2 : MonoBehaviour
         isRunning = currentSpeed == 10.0f;
 
         HandleMovement(currentSpeed);
-
-        Attack();
+        
        
     }
 
     void Attack()
     {
-        // On Click
+        
     }
 
     void HandleMovement(float moveSpeed)
@@ -155,10 +170,41 @@ public class PlayerController2 : MonoBehaviour
         return seed != null;
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Chainsaw"))
+        {
+            Quaternion offsetChainSawRotation = Quaternion.Euler(45, -100, 110);
+            other.transform.parent = GetGunsawNewTransform();
+            other.transform.localPosition = Vector3.zero;
+            other.transform.localRotation = offsetChainSawRotation; 
+            hasChainSaw = true;
+        }
+        if (other.CompareTag("Machete"))
+        {
+            Vector3 offsetMachete = new Vector3(-0.086f, 0.21f, -0.005f);
+            Quaternion offsetMacheteRotation = Quaternion.Euler(100, -57, 292);
+            other.transform.parent = GetMacheteNewTransform();
+            other.transform.localPosition = offsetMachete;
+            other.transform.localRotation = offsetMacheteRotation;
+            hasMachete = true;
+        }
+
+    }
+
 
     public Transform GetSeedNewTransform()
     {
         return playerPickPoint;
+    }
+
+    public Transform GetMacheteNewTransform()
+    {
+        return rightHand;
+    }
+    public Transform GetGunsawNewTransform()
+    {
+        return rightHand;
     }
 
     public void RecieveDamage(int damage)
