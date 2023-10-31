@@ -24,6 +24,7 @@ public class PlayerController2 : MonoBehaviour
     public bool headChopped;
     public bool hasChainSaw;
     public bool hasMachete;
+    public bool isPlantOnMe;
     #endregion
 
     #region weirdos

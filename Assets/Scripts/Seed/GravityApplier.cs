@@ -7,6 +7,7 @@ public class GravityApplier : MonoBehaviour
     public float gravityStrength = 5.0f;
     public bool applyGravity = true;
     public bool isOnGround;
+    private PlayerController2 playerController;
     float groundDistance = 0.2f; // antes 0.4f;
     LayerMask groundMask;
     public GameObject lightFromPlant;
@@ -14,6 +15,7 @@ public class GravityApplier : MonoBehaviour
     private void Start()
     {
         groundMask = LayerMask.GetMask("Ground");
+        playerController = FindObjectOfType<PlayerController2>();
     }
 
     void Update()
@@ -41,7 +43,7 @@ public class GravityApplier : MonoBehaviour
         if(isOnGround)
         {
             applyGravity = false;
-            ReActiveLight();
+            if (!playerController.isPlantOnMe) ReActiveLight();
         }
     }
 

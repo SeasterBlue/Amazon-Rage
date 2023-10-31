@@ -6,6 +6,7 @@ public class Seed : MonoBehaviour
     private PlayerController2 player;
     private GravityApplier gravityApplier;
 
+
     private void Awake()
     {
         player = FindObjectOfType<PlayerController2>();
@@ -18,6 +19,7 @@ public class Seed : MonoBehaviour
         if (other.CompareTag("Player") && !player.HasSeed())
         {
             player.seed = this;
+            player.isPlantOnMe = true;
             SetSeedParent(player);
         }   else if (other.CompareTag("Player") && player.HasSeed())
         {
@@ -33,6 +35,7 @@ public class Seed : MonoBehaviour
     public void RemoveSeedParent()
     {
         transform.position = player.transform.position - new Vector3(0, -1.5f, -2.0f); // lo iremos mejorando
+        player.isPlantOnMe = false;
         player.seed = null;
         transform.parent = null;
         gravityApplier.applyGravity = true;
