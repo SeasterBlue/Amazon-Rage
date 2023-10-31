@@ -17,7 +17,7 @@ public class PlayerController2 : MonoBehaviour
     #endregion
 
     #region bools
-    private bool isGrounded;
+    public bool isGrounded;
     public bool isRunning = false;
     public bool oneArmChopped;
     public bool twoArmsChopped;
