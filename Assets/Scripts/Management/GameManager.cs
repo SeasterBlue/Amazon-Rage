@@ -2,19 +2,19 @@ using System;
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
 public class GameManager : MonoBehaviour
 {
     private static GameManager instance;
 
-    GameObject leaf;
     Transform finalSpot;
     Transform magicPlant;
     public float distanceMagnitude;
     public float minDistance = 2;
     public float maxDistance = 160;
-    Renderer plantRenderer;
-    Material plantMaterial;
+
+    public Light pointLight;
 
 
 
@@ -43,9 +43,6 @@ public class GameManager : MonoBehaviour
     {
         finalSpot = GameObject.Find("FinalSpot").GetComponent<Transform>();
         magicPlant = GameObject.Find("MagicPlant").GetComponent<Transform>();
-        leaf = GameObject.Find("Box037").GetComponent<GameObject>();
-        plantRenderer = leaf.GetComponent<Renderer>();
-        plantMaterial = plantRenderer.GetComponent<Material>();
     }
 
     void Update()
@@ -56,17 +53,15 @@ public class GameManager : MonoBehaviour
 
     public void CalcuteDistance()
     {
-        distanceMagnitude = finalSpot.position.magnitude - magicPlant.position.magnitude;
-        
+        distanceMagnitude = Mathf.Abs(finalSpot.position.magnitude - magicPlant.position.magnitude);
     }
 
     public void ControlBrightnessBasedOnDistance()
     {
-        float brightnessFactor = Mathf.InverseLerp(minDistance, maxDistance, distanceMagnitude);
-        Color originalColor = plantMaterial.color;
-        Color finalColor = Color.Lerp(originalColor, Color.yellow, brightnessFactor);
-        plantMaterial.color = finalColor;
 
+        float normalizedDistance = Mathf.Clamp01(distanceMagnitude / 158f);
+        float intensity = Mathf.Lerp(7f, 0f, normalizedDistance);
+        pointLight.intensity = intensity;
     }
 
 
