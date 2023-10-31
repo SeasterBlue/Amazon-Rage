@@ -3986,7 +3986,12 @@ PrefabInstance:
     - target: {fileID: 3049428253405200621, guid: e62e775cb5c996a4c944ff20f3cec481,
         type: 3}
       propertyPath: m_Name
-      value: FX_PowerUp_Coin_AA
+      value: LightFromPlant
+      objectReference: {fileID: 0}
+    - target: {fileID: 3049428253405200621, guid: e62e775cb5c996a4c944ff20f3cec481,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3049428253405200658, guid: e62e775cb5c996a4c944ff20f3cec481,
         type: 3}
@@ -4786,6 +4791,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gravityStrength: 9.8
   applyGravity: 0
+  isOnGround: 0
+  lightFromPlant: {fileID: 931753936}
 --- !u!1 &849113322
 GameObject:
   m_ObjectHideFlags: 0
@@ -5231,6 +5238,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4839620930639023318, guid: 7bcb58554a8c3844daff1cb4024489dc,
     type: 3}
   m_PrefabInstance: {fileID: 923603890}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &931753936 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3049428253405200621, guid: e62e775cb5c996a4c944ff20f3cec481,
+    type: 3}
+  m_PrefabInstance: {fileID: 742761153}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &945472459
 PrefabInstance:

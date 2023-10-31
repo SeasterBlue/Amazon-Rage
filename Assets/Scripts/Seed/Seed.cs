@@ -25,10 +25,6 @@ public class Seed : MonoBehaviour
         }
     }
 
-
-
-
-
     public void SetSeedParent(PlayerController2 player)
     {
         transform.parent = player.GetSeedNewTransform();

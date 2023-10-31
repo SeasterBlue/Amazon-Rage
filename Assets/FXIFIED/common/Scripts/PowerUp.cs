@@ -18,8 +18,9 @@ public class PowerUp : MonoBehaviour
     void Pickup()
     {
         Instantiate(pickupEffect, transform.position, transform.rotation);
+        //Destroy(pickupEffect, 3); // puede consumir muchos recursos
 
 
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 }

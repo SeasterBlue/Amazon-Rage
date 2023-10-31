@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class GravityApplier : MonoBehaviour
 {
-    public float gravityStrength = 9.8f; // Strength of gravity
+    public float gravityStrength = 5.0f;
     public bool applyGravity = true;
     public bool isOnGround;
-    float groundDistance = 0.4f;
+    float groundDistance = 0.2f; // antes 0.4f;
     LayerMask groundMask;
+    public GameObject lightFromPlant;
 
     private void Start()
     {
@@ -22,21 +23,31 @@ public class GravityApplier : MonoBehaviour
         {
             ApplyGravity();
         }
+        else if (isOnGround)
+        {
+            DeActivateGravity();
+        }
     }
 
     bool CheckIfGrounded()
     {
         isOnGround = Physics.CheckSphere(transform.position, groundDistance, groundMask);
-        ActivateGravity();
+
         return isOnGround;
     }
 
-    void ActivateGravity()
+    void DeActivateGravity()
     {
         if(isOnGround)
         {
             applyGravity = false;
+            ReActiveLight();
         }
+    }
+
+    void ReActiveLight()
+    {
+        lightFromPlant.SetActive(true);
     }
      
 
