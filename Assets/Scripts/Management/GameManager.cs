@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
         get { return instance; }
     }
 
-    private bool victoryTriggered = false;
+    //private bool victoryTriggered = false;
 
     private void Awake()
     {
