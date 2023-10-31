@@ -17,13 +17,14 @@ public class PlayerController2 : MonoBehaviour
     #endregion
 
     #region bools
-    private bool isGrounded;
+    public bool isGrounded;
     public bool isRunning = false;
     public bool oneArmChopped;
     public bool twoArmsChopped;
     public bool headChopped;
     public bool hasChainSaw;
     public bool hasMachete;
+    public bool isPlantOnMe;
     #endregion
 
     #region weirdos
@@ -35,7 +36,8 @@ public class PlayerController2 : MonoBehaviour
     Transform rightHand;
     Transform head;
     Transform plantHead;
-    Transform machete;
+    public GameObject machete;
+    public GameObject chainsaw;
     public Seed seed;
     Rigidbody rb;
     Animator animator;
@@ -48,7 +50,8 @@ public class PlayerController2 : MonoBehaviour
         groundMask = LayerMask.GetMask("Ground");
         playerPickPoint = GameObject.Find("PickPoint").GetComponent<Transform>();
         leftArm = GameObject.Find("Bone003").GetComponent<Transform>();
-        machete = GameObject.Find("Machete").GetComponent<Transform>();
+        machete = GameObject.Find("Machete");
+        chainsaw = GameObject.Find("Chainsaw");
         gunPoint = GameObject.Find("GunPoint").GetComponent<Transform>();
         rightArm = GameObject.Find("Bone032").GetComponent<Transform>();
         rightHand = GameObject.Find("Bone029").GetComponent<Transform>();
@@ -84,12 +87,12 @@ public class PlayerController2 : MonoBehaviour
             seed.RemoveSeedParent();
         }
 
-        //if(Input.GetKeyDown(KeyCode.X))
-        //{
-        //    if (twoArmsChopped) CutHead();
-        //    if (oneArmChopped) CutRightArm();
-        //    CutLeftArm();
-        //}
+        if(Input.GetKeyDown(KeyCode.X))
+        {
+            if (twoArmsChopped) CutHead();
+            if (oneArmChopped) CutRightArm();
+            CutLeftArm();
+        }
     }
 
     void FixedUpdate()
@@ -135,12 +138,30 @@ public class PlayerController2 : MonoBehaviour
     {
         leftArm.localScale = new Vector3(0.0001f, 0.0001f, 0.0001f);
         oneArmChopped = true;
+        if (hasChainSaw && !hasMachete)
+        {
+            Object.Destroy(chainsaw);
+            hasChainSaw = false;
+        }
+        else if(hasMachete && hasChainSaw)
+        {
+            Object.Destroy(chainsaw);
+            hasChainSaw = false;
+
+            Vector3 offsetMachete = new Vector3(-0.086f, 0.21f, -0.005f);
+            Quaternion offsetMacheteRotation = Quaternion.Euler(100, -57, 292);
+            machete.transform.parent = GetMacheteNewTransform();
+            machete.transform.localPosition = offsetMachete;
+            machete.transform.localRotation = offsetMacheteRotation;
+
+        }
+
     }
 
     void CutRightArm()
     {
-        rightArm.localScale = new Vector3(0.0001f, 0.0001f, 0.0001f);
-        twoArmsChopped = true;
+        rightArm.localScale = new Vector3(0.0001f, 0.0001f, 0.0001f); twoArmsChopped = true; hasMachete = false;
+        if(hasMachete && !hasChainSaw) Object.Destroy(machete);
     }
 
     void CutHead()
@@ -148,6 +169,9 @@ public class PlayerController2 : MonoBehaviour
         head.localScale = new Vector3(0.1f, 0.1f, 0.1f);
         plantHead.localScale = new Vector3(7, 7, 7);
         headChopped = true;
+
+
+        gameManager.OnGameOver(); //eltrigger de que pierde.
     }
 
     private void DestroySeed() //no usada aun
@@ -177,20 +201,20 @@ public class PlayerController2 : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Machete") && !hasChainSaw)
+        if (other.CompareTag("Machete") && !hasChainSaw && !twoArmsChopped)
         {
             GiveMacheteWithoutChainSaw(other);
         }
-        else if (other.CompareTag("Machete") && hasChainSaw)
+        else if (other.CompareTag("Machete") && hasChainSaw && !twoArmsChopped)
         {
             PutMacheteAfterChainsaw(other);
         }
 
-        if (other.CompareTag("Chainsaw") && !hasMachete)
+        if (other.CompareTag("Chainsaw") && !hasMachete && !oneArmChopped)
         {
             GiveChainSawWithoutMachete(other);
         }
-        else if (other.CompareTag("Chainsaw") && hasMachete)
+        else if (other.CompareTag("Chainsaw") && hasMachete && !oneArmChopped)
         {
             ReplaceMacheteWithChainSaw(other);
 
