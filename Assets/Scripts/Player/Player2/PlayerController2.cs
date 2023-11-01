@@ -25,6 +25,7 @@ public class PlayerController2 : MonoBehaviour
     public bool hasChainSaw;
     public bool hasMachete;
     public bool isPlantOnMe;
+    public bool shouldMove = true;
     #endregion
 
     #region weirdos
@@ -42,6 +43,7 @@ public class PlayerController2 : MonoBehaviour
     Rigidbody rb;
     Animator animator;
     GameManager gameManager;
+    public Vector2 inputVector;
     #endregion
 
     void Start()
@@ -97,8 +99,8 @@ public class PlayerController2 : MonoBehaviour
 
     void FixedUpdate()
     {
-        currentSpeed = Input.GetKey(KeyCode.LeftShift) ? 10.0f : 5.0f;
-        isRunning = currentSpeed == 10.0f;
+        currentSpeed = Input.GetKey(KeyCode.LeftShift) ? 7.0f : 5.0f;
+        isRunning = currentSpeed == 7.0f;
 
         HandleMovement(currentSpeed);
         
@@ -112,20 +114,23 @@ public class PlayerController2 : MonoBehaviour
 
     void HandleMovement(float moveSpeed)
     {
+        if (shouldMove)
+        {
+            inputVector = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+            bool isMoving = inputVector != Vector2.zero;
 
-        Vector2 inputVector = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-        bool isMoving = inputVector != Vector2.zero;
+            animator.SetBool("isWalking", isMoving && !isRunning);
+            animator.SetBool("isRunning", isRunning);
 
-        animator.SetBool("isWalking", isMoving && !isRunning);
-        animator.SetBool("isRunning", isRunning);
+            //
+            Vector3 moveDirection = new(inputVector.x, 0.0f, inputVector.y);
+            float moveDistance = moveSpeed * Time.deltaTime;
 
-        //
-        Vector3 moveDirection = new(inputVector.x, 0.0f, inputVector.y);
-        float moveDistance = moveSpeed * Time.deltaTime;
-
-        //Movement
-        transform.position += moveDirection * moveDistance;
-        transform.forward = Vector3.Slerp(transform.forward, moveDirection, Time.deltaTime * rotationSpeed);
+            //Movement
+            transform.position += moveDirection * moveDistance;
+            transform.forward = Vector3.Slerp(transform.forward, moveDirection, Time.deltaTime * rotationSpeed);
+        }
+        
     }
 
     void HandleJump()
