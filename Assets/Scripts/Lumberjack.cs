@@ -29,7 +29,7 @@ public class Lumberjack : RecyclableObject
 
     internal override void Release()
     {
-        // TODO
+        
     }
 
     private void OnTriggerEnter(Collider other)

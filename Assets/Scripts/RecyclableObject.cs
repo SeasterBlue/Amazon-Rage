@@ -5,10 +5,12 @@ using UnityEngine;
 public abstract class RecyclableObject : MonoBehaviour
 {
     private ObjectPool objectPool;
+    public int configuredTransformIndex;
 
-    internal void Configure(ObjectPool objPool)
+    internal void Configure(ObjectPool objPool, int configTranformIndex)
     {
         this.objectPool = objPool;
+        configuredTransformIndex = configTranformIndex;
     }
 
     public void Recycle()
