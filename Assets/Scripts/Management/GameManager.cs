@@ -1,19 +1,29 @@
 using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
 public class GameManager : MonoBehaviour
 {
     private static GameManager instance;
-    public int seedDropped = 0;
-    [SerializeField] int seedsGoal = 1;
+
+    Transform finalSpot;
+    Transform magicPlant;
+    public float distanceMagnitude;
+    public float minDistance = 2;
+    public float maxDistance = 160;
+
+    public Light pointLight;
+
+
+
     public static GameManager Instance
     {
         get { return instance; }
     }
 
-    [SerializeField] private float timerDurationInMinutes = 5f;
-    private bool victoryTriggered = false;
+    //private bool victoryTriggered = false;
 
     private void Awake()
     {
@@ -27,35 +37,33 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        OnSeedPicked();
     }
 
     void Start()
     {
-        StartCoroutine(StartTimer(timerDurationInMinutes));
+        finalSpot = GameObject.Find("FinalSpot").GetComponent<Transform>();
+        magicPlant = GameObject.Find("MagicPlant").GetComponent<Transform>();
     }
 
     void Update()
     {
-        if (seedDropped == seedsGoal && !victoryTriggered)
-        {
-            victoryTriggered = true;
-            OnVictory();
-        }
+        CalcuteDistance();
+        ControlBrightnessBasedOnDistance();
     }
 
-    IEnumerator StartTimer(float durationInMinutes)
+    public void CalcuteDistance()
     {
-        float durationInSeconds = durationInMinutes * 60;
-
-        while (durationInSeconds > 0)
-        {
-            yield return new WaitForSeconds(1f);
-            durationInSeconds -= 1;
-        }
-
-        OnGameOver();
+        distanceMagnitude = Mathf.Abs(finalSpot.position.magnitude - magicPlant.position.magnitude);
     }
+
+    public void ControlBrightnessBasedOnDistance()
+    {
+
+        float normalizedDistance = Mathf.Clamp01(distanceMagnitude / 158f);
+        float intensity = Mathf.Lerp(7f, 0f, normalizedDistance);
+        pointLight.intensity = intensity;
+    }
+
 
     public void OnGameOver()
     {
