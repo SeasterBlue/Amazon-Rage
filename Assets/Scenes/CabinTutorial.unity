@@ -1266,8 +1266,8 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1
-  m_Range: 10
+  m_Intensity: 30.92
+  m_Range: 23.23
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -1325,7 +1325,7 @@ Transform:
   m_GameObject: {fileID: 317090970}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 269.5, y: -69.00017, z: 234.4}
+  m_LocalPosition: {x: 229, y: -50.249, z: 118.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5186,7 +5186,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 849113322}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
   m_Name: 
@@ -8257,6 +8257,16 @@ PrefabInstance:
       propertyPath: m_UseGravity
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 531979564364844238, guid: bd4940879afee5e42a3296d63f7809f7,
+        type: 3}
+      propertyPath: m_Interpolate
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 531979564364844238, guid: bd4940879afee5e42a3296d63f7809f7,
+        type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 835864520579887535, guid: bd4940879afee5e42a3296d63f7809f7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -11295,7 +11305,7 @@ Transform:
   m_GameObject: {fileID: 2037274620}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 73.331856, y: -89.4, z: 297.8}
+  m_LocalPosition: {x: 229, y: -50.249, z: 118.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -11549,7 +11559,6 @@ SceneRoots:
   - {fileID: 1946322517}
   - {fileID: 1407908706}
   - {fileID: 1378655752}
-  - {fileID: 716201064}
   - {fileID: 2070134444}
   - {fileID: 1313104180}
   - {fileID: 465022584}
