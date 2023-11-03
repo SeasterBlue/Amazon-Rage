@@ -34,7 +34,9 @@ public class Seed : MonoBehaviour
     }
     public void RemoveSeedParent()
     {
-        transform.position = player.transform.position - new Vector3(0, -1.5f, -2.0f); // lo iremos mejorando
+        float xOffset = UnityEngine.Random.Range(-2, 2);
+        float zOffset = UnityEngine.Random.Range(-2, 2);
+        transform.position = player.transform.position - new Vector3(xOffset, -1.5f, zOffset); // lo iremos mejorando
         player.isPlantOnMe = false;
         player.seed = null;
         transform.parent = null;
