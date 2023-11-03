@@ -301,4 +301,5 @@ public class PlayerController2 : MonoBehaviour
             gameManager.OnGameOver();
         }
     }
+
 }

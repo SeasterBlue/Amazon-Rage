@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Nest
+  - Lumberjack
   - Chainsaw
   - Machete
   layers:
@@ -14,8 +15,8 @@ TagManager:
   - Ground
   - Water
   - UI
-  - 
-  - 
+  - Player
+  - Lumberjack
   - PostProcessing
   - 
   - 
