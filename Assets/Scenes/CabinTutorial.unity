@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: b5a27fa4b11bfb24cbc6daff3802c229, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.077704296, g: 0.13235283, b: 0.16540626, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -241,8 +241,8 @@ AudioReverbZone:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 40821121}
   m_Enabled: 1
-  m_MinDistance: 96.5
-  m_MaxDistance: 168.9
+  m_MinDistance: 101.6
+  m_MaxDistance: 185.1
   m_ReverbPreset: 16
   m_Room: -1000
   m_RoomHF: -3300
@@ -855,6 +855,11 @@ PrefabInstance:
       propertyPath: m_Constraints
       value: 126
       objectReference: {fileID: 0}
+    - target: {fileID: 1471619182549588151, guid: d88a529b0780be54faec1aea0a3f6ef4,
+        type: 3}
+      propertyPath: tarjetTag
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 2679386735757244151, guid: d88a529b0780be54faec1aea0a3f6ef4,
         type: 3}
       propertyPath: m_Size.x
@@ -1458,7 +1463,7 @@ PrefabInstance:
     - target: {fileID: 7999494618748016148, guid: bee3d1cfa7b7b1f41b9325b36aaadc8d,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1995,8 +2000,8 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 1
+  m_Color: {r: 0.9905661, g: 1, b: 0.8066038, a: 1}
+  m_Intensity: 2.11
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -2005,10 +2010,10 @@ Light:
     m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
-    m_Strength: 1
+    m_Strength: 0.76
     m_Bias: 0.05
     m_NormalBias: 0.4
-    m_NearPlane: 0.2
+    m_NearPlane: 0.1
     m_CullingMatrixOverride:
       e00: 1
       e01: 0
@@ -2054,13 +2059,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1341038002}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
+  m_LocalRotation: {x: 0.046668593, y: -0.8843873, z: 0.45548934, w: 0.09061268}
   m_LocalPosition: {x: 7.5410266, y: -16.494688, z: 12.386677}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1023009461}
-  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+  m_LocalEulerAnglesHint: {x: 54.5, y: -168.3, z: 0}
 --- !u!114 &1341038005
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2261,6 +2266,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2420859353232691537, guid: e91c55ade2f304943a4a38dcaa5c012f,
+        type: 3}
+      propertyPath: tarjetTag
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 3916100261883399530, guid: e91c55ade2f304943a4a38dcaa5c012f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2359,11 +2369,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1177371206332036359, guid: 7a4a1a4fb4219da409509d29450f3846,
-        type: 3}
-      propertyPath: m_NavMeshData
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 4016358693060150257, guid: 7a4a1a4fb4219da409509d29450f3846,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2548,7 +2553,7 @@ Camera:
   m_ShutterSpeed: 0.005
   m_Aperture: 16
   m_FocusDistance: 10
-  m_FocalLength: 50
+  m_FocalLength: 20.78461
   m_BladeCount: 5
   m_Curvature: {x: 2, y: 11}
   m_BarrelClipping: 0.25
