@@ -3,9 +3,14 @@ guid: 9cdfee3e63becb54d91f91f1b3b62e82
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Chainsaw_material
+    second: {fileID: 2100000, guid: d33b6cbd71ed39e428d906316b728843, type: 2}
   materials:
-    materialImportMode: 2
+    materialImportMode: 1
     materialName: 0
     materialSearch: 1
     materialLocation: 1
