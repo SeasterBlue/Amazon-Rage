@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Nest
   - Lumberjack
+  - Chainsaw
+  - Machete
   layers:
   - Default
   - TransparentFX

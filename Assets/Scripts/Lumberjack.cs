@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using static Cinemachine.DocumentationSortingAttribute;
 
 [RequireComponent(typeof(Rigidbody), typeof(Collider), typeof(NavMeshAgent))]
 public class Lumberjack : RecyclableObject
@@ -11,6 +10,7 @@ public class Lumberjack : RecyclableObject
     private NavMeshAgent navAgent;
     private Animator animator;
     [SerializeField] private Weapon machete;
+    private bool attacking = false;
 
     internal override void Init()
     {
@@ -44,7 +44,7 @@ public class Lumberjack : RecyclableObject
 
     private void OnTriggerStay(Collider other)
     {
-        if(other.gameObject.CompareTag("Player") && !machete.attacking)
+        if(other.gameObject.CompareTag("Player") && !attacking)
         {
             Vector3 destination = other.gameObject.transform.position;
             navAgent.destination = destination;
@@ -56,10 +56,11 @@ public class Lumberjack : RecyclableObject
             float remainingDistance = Vector3.Distance(transform.position, destination);
             if(remainingDistance <= 0.95f)
             {
-                //Debug.Log("Lumberjack attacking");
+                Debug.Log("Lumberjack attacking");
                 navAgent.destination = transform.position;
                 animator.SetBool("attacking", true);
                 machete.attacking = true;
+                attacking = true;
                 Invoke("AnimToWalk", 2.267f);
             }
         }
@@ -89,6 +90,6 @@ public class Lumberjack : RecyclableObject
     {
         animator.SetBool("attacking", false);
         animator.SetBool("walking", true);
-        machete.attacking = false;
+        attacking = false;
     }
 }
