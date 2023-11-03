@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerController2 : MonoBehaviour
 {
     #region int
-    int health = 50;
+    public int health = 50;
     #endregion
 
     #region floats
@@ -174,4 +174,5 @@ public class PlayerController2 : MonoBehaviour
             gameManager.OnGameOver();
         }
     }
+
 }

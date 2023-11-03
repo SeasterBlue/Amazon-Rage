@@ -8,7 +8,7 @@ using UnityEngine;
 public class Weapon : MonoBehaviour
 {
     public int damage;
-    [SerializeField] private string tarjetTag;
+    [SerializeField] private string targetTag;
     [SerializeField] private AudioSource sfx;
 
     private Lumberjack enemy;
@@ -37,13 +37,15 @@ public class Weapon : MonoBehaviour
 
     public void Attacking(Collider other)
     {
-        if (other.CompareTag(tarjetTag))
+        if (other.CompareTag(targetTag))
         {
-            if (tarjetTag == "Enemy")
+            if (targetTag == "Lumberjack")
             {
                 enemy = other.gameObject.GetComponent<Lumberjack>();
                 enemy.RecieveDamage(damage);
-            } else {
+            } 
+            else if(targetTag == "Player")
+            {
                 player = other.gameObject.GetComponent<PlayerController2>();
                 player.RecieveDamage(damage);
             }
