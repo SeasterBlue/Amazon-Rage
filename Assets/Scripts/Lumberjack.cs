@@ -56,8 +56,7 @@ public class Lumberjack : RecyclableObject
             float remainingDistance = Vector3.Distance(transform.position, destination);
             if(remainingDistance <= 0.95f)
             {
-                Debug.Log("Lumberjack attacking");
-                //navAgent.isStopped = true;
+                //Debug.Log("Lumberjack attacking");
                 navAgent.destination = transform.position;
                 animator.SetBool("attacking", true);
                 machete.attacking = true;
