@@ -6,7 +6,7 @@ using UnityEngine.AI;
 [RequireComponent(typeof(Rigidbody), typeof(Collider), typeof(NavMeshAgent))]
 public class Lumberjack : RecyclableObject
 {
-    private int health;
+    [SerializeField] private int health;
     private NavMeshAgent navAgent;
     private Animator animator;
     [SerializeField] private Weapon machete;
@@ -25,12 +25,14 @@ public class Lumberjack : RecyclableObject
         if(animator == null)
             animator = GetComponent<Animator>();
 
-        Invoke(nameof(Recycle), 15);
     }
 
     internal override void Release()
     {
-        
+        // Set animator parameters back to initial state
+        animator.SetBool("attacking", false);
+        animator.SetBool("walking", false);
+        animator.SetInteger("health", 100);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -56,7 +58,6 @@ public class Lumberjack : RecyclableObject
             float remainingDistance = Vector3.Distance(transform.position, destination);
             if(remainingDistance <= 0.95f)
             {
-                Debug.Log("Lumberjack attacking");
                 navAgent.destination = transform.position;
                 animator.SetBool("attacking", true);
                 machete.attacking = true;
@@ -79,10 +80,11 @@ public class Lumberjack : RecyclableObject
     public void RecieveDamage(int damage)
     {
         health -= damage;
+        animator.SetInteger("health", health);
         if (health <= 0)
         {
             // ANIMATION AND SOUND OF DEAD
-            Destroy(gameObject);
+            Invoke(nameof(Recycle), 3);
         }
     }
 

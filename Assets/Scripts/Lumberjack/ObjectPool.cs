@@ -105,7 +105,7 @@ public class ObjectPool
     }
 
     /// <summary>
-    /// Sets the received gameObject as not active and ready to be recycled
+    /// Sets the received gameObject as not active and enqueues it in recycledObjects
     /// </summary>
     /// <param name="gameObjectToRecycle">Active gameObject to be recycled</param>
     public void RecycleGameObject(RecyclableObject gameObjectToRecycle)
@@ -113,10 +113,10 @@ public class ObjectPool
         var wasInstantiated = instantiatedObjects.Remove(gameObjectToRecycle);
         Assert.IsTrue(wasInstantiated, $"{gameObjectToRecycle.name} was not instantiate on {prefab.name} pool");
 
+        gameObjectToRecycle.Release();
         gameObjectToRecycle.gameObject.SetActive(false);
         activePlaces[gameObjectToRecycle.configuredTransformIndex] = false;
         occupiedPlaces--;
-        gameObjectToRecycle.Release();
         recycledObjects.Enqueue(gameObjectToRecycle);
     }
 

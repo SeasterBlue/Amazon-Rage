@@ -30,9 +30,11 @@ public class Weapon : MonoBehaviour
         if (attacking == true)
         {
             Attacking(other);
-            attacking = false;
+            if(!targetTag.Equals("Lumberjack"))
+                attacking = false;
+            else
+                StartCoroutine(DisableChainsawAttack());
         }
-
     }
 
     public void Attacking(Collider other)
@@ -53,16 +55,9 @@ public class Weapon : MonoBehaviour
         }
     }
 
-    public void Grab()
+    IEnumerator DisableChainsawAttack()
     {
-        //
-    }
-    public void Equip()
-    {
-        //
-    }
-    public void Throw()
-    {
-        //
+        yield return new WaitForSeconds(1.09f);
+        attacking = false;
     }
 }
