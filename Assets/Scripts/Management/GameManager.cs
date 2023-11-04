@@ -60,7 +60,7 @@ public class GameManager : MonoBehaviour
     {
 
         float normalizedDistance = Mathf.Clamp01(distanceMagnitude / 158f);
-        float intensity = Mathf.Lerp(7f, 0f, normalizedDistance);
+        float intensity = Mathf.Lerp(1f, 0f, normalizedDistance);
         pointLight.intensity = intensity;
     }
 
