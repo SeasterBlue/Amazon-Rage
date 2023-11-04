@@ -310,8 +310,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.8382969, y: 0.37896442, z: 0.3077168}
-  m_Center: {x: -0.8058697, y: 0.07670746, z: 0.025682341}
+  m_Size: {x: 0.7642472, y: 0.18321444, z: 0.23144314}
+  m_Center: {x: -0.8685465, y: 0.013751197, z: 0.0049100607}
 --- !u!82 &1281586306715821186
 AudioSource:
   m_ObjectHideFlags: 0
@@ -420,8 +420,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd30bea27450bbe45aa5be051a147b7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 8
-  tarjetTag: Player
+  damage: 100
+  targetTag: Lumberjack
   sfx: {fileID: 0}
   attacking: 0
 --- !u!54 &4343062521973421428

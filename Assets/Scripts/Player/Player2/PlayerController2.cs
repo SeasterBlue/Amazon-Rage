@@ -79,8 +79,7 @@ public class PlayerController2 : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             if(!hasChainSaw && !hasMachete) animator.SetTrigger("isHeadAttack");
-            if (hasChainSaw) animator.SetTrigger("AttackGunsaw");
-            if (!hasChainSaw && hasMachete) Attack();
+            if (hasChainSaw || hasMachete) Attack();
         }
 
        
@@ -112,13 +111,14 @@ public class PlayerController2 : MonoBehaviour
     {
         if(!headChopped)
         {
-            animator.SetTrigger("isAttacking");
             if(hasChainSaw)
             {
-                // Attack with Chainsaw
+                animator.SetTrigger("AttackGunsaw");
+                chainsaw.GetComponent<Weapon>().attacking = true;
             }
             else if(hasMachete)
             {
+                animator.SetTrigger("isAttacking");
                 machete.GetComponent<Weapon>().attacking = true;
             }
         }
