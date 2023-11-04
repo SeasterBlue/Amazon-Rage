@@ -5,12 +5,14 @@ public class Seed : MonoBehaviour
 {
     private PlayerController2 player;
     private GravityApplier gravityApplier;
+    private GameManager gameManager;
 
 
     private void Awake()
     {
         player = FindObjectOfType<PlayerController2>();
         gravityApplier = FindObjectOfType<GravityApplier>();
+        gameManager = FindObjectOfType<GameManager>();
     }
 
 
@@ -21,9 +23,16 @@ public class Seed : MonoBehaviour
             player.seed = this;
             player.isPlantOnMe = true;
             SetSeedParent(player);
-        }   else if (other.CompareTag("Player") && player.HasSeed())
+        }
+        if (other.gameObject.tag == "FinalSpot" && player.HasSeed())
         {
-            Debug.Log("Ya la tienes prra");
+            player.areYouReadyToWin = true;
+            SetFinalSeedParent(player);
+            player.isPlantOnMe = false;
+            gravityApplier.applyGravity = true;
+            gameManager.OnVictory();
+
+
         }
     }
 
@@ -32,6 +41,14 @@ public class Seed : MonoBehaviour
         transform.parent = player.GetSeedNewTransform();
         transform.localPosition = Vector3.zero;
     }
+
+    public void SetFinalSeedParent(PlayerController2 player)
+    {
+        transform.parent = player.GetSeedFinalNewTransform();
+        transform.localPosition = Vector3.zero;
+
+    }
+
     public void RemoveSeedParent()
     {
         float xOffset = UnityEngine.Random.Range(-2, 2);

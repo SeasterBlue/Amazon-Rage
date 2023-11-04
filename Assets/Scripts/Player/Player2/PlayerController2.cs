@@ -26,6 +26,7 @@ public class PlayerController2 : MonoBehaviour
     public bool hasMachete;
     public bool isPlantOnMe;
     public bool shouldMove = true;
+    public bool areYouReadyToWin;
     #endregion
 
     #region weirdos
@@ -38,6 +39,7 @@ public class PlayerController2 : MonoBehaviour
     Transform tipHand;
     Transform head;
     Transform plantHead;
+    Transform WinningPot;
     public GameObject machete;
     public GameObject chainsaw;
     public Seed seed;
@@ -53,7 +55,7 @@ public class PlayerController2 : MonoBehaviour
         groundMask = LayerMask.GetMask("Ground");
         playerPickPoint = GameObject.Find("PickPoint").GetComponent<Transform>();
         leftArm = GameObject.Find("Bone003").GetComponent<Transform>();
-        machete = GameObject.Find("Machete");
+        machete = GameObject.Find("Machete Player");
         chainsaw = GameObject.Find("Chainsaw");
         gunPoint = GameObject.Find("GunPoint").GetComponent<Transform>();
         rightArm = GameObject.Find("Bone032").GetComponent<Transform>();
@@ -62,6 +64,7 @@ public class PlayerController2 : MonoBehaviour
 
         head = GameObject.Find("Bone018").GetComponent<Transform>();
         plantHead = GameObject.Find("Bone019").GetComponent<Transform>();
+        WinningPot = GameObject.Find("FinalSpot").GetComponent<Transform>();
         animator = GetComponent<Animator>();
         gameManager= FindObjectOfType<GameManager>().GetComponent<GameManager>();
         
@@ -297,6 +300,11 @@ public class PlayerController2 : MonoBehaviour
     public Transform GetGunPointTransform()
     {
         return gunPoint;
+    }
+
+    public Transform GetSeedFinalNewTransform()
+    {
+        return WinningPot;
     }
 
 

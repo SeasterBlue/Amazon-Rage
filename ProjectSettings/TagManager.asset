@@ -8,6 +8,9 @@ TagManager:
   - Lumberjack
   - Chainsaw
   - Machete
+  - lui_btn_01
+  - Back Button
+  - FinalSpot
   layers:
   - Default
   - TransparentFX

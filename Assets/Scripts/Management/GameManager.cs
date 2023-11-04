@@ -71,9 +71,9 @@ public class GameManager : MonoBehaviour
         Debug.Log("Game Over");
     }
 
-    private void OnVictory()
+    public void OnVictory()
     {
-        
+        Debug.Log("Ganaste maldita perra");
     }
 
     public void OnSeedPicked()

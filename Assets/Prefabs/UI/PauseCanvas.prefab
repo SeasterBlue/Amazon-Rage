@@ -498,7 +498,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 38677855414298191}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b4ff37adec0cca74bb9a16948ee0e3b9, type: 3}
   m_Name: 
@@ -2597,7 +2597,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-        - m_Target: {fileID: 382360841214506919}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: Pause, Assembly-CSharp
           m_MethodName: ResumeGame
           m_Mode: 1
@@ -2643,7 +2643,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-        - m_Target: {fileID: 382360841214506919}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: Pause, Assembly-CSharp
           m_MethodName: ResumeGame
           m_Mode: 1
@@ -8587,7 +8587,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 138, y: -147}
+  m_AnchoredPosition: {x: 65.6, y: -67.3}
   m_SizeDelta: {x: 120, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3147134762095473088
@@ -8719,7 +8719,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-        - m_Target: {fileID: 382360841214506919}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: Pause, Assembly-CSharp
           m_MethodName: PauseGame
           m_Mode: 1
@@ -8765,7 +8765,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-        - m_Target: {fileID: 382360841214506919}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: Pause, Assembly-CSharp
           m_MethodName: PauseGame
           m_Mode: 1
@@ -9524,7 +9524,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-        - m_Target: {fileID: 382360841214506919}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: Pause, Assembly-CSharp
           m_MethodName: ResumeGame
           m_Mode: 1
@@ -9582,7 +9582,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-        - m_Target: {fileID: 382360841214506919}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: Pause, Assembly-CSharp
           m_MethodName: ResumeGame
           m_Mode: 1
@@ -13840,7 +13840,6 @@ GameObject:
   - component: {fileID: 7600240365777467586}
   - component: {fileID: 7153305896476219385}
   - component: {fileID: 226589824976108720}
-  - component: {fileID: 382360841214506919}
   m_Layer: 5
   m_Name: PauseCanvas
   m_TagString: Untagged
@@ -13893,7 +13892,7 @@ Canvas:
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
-  m_OverridePixelPerfect: 0
+  m_OverridePixelPerfect: 1
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
@@ -13987,7 +13986,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   States:
-  - {fileID: 7999494618748016148}
   - {fileID: 38677855414298191}
   - {fileID: 1365101576130333307}
   - {fileID: 2933444514651699605}
@@ -14010,7 +14008,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfd68e3ecfc952540a82741cf08462e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FirstSelectedButton: {fileID: 2892870784007342995}
+  FirstSelectedButton: {fileID: 2966599858477675335}
   SelectedButton: {fileID: 0}
 --- !u!114 &7153305896476219385
 MonoBehaviour:
@@ -14038,20 +14036,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LoadingPanel: {fileID: 6959654844850201398}
   LoadingBar: {fileID: 2891216434550918470}
---- !u!114 &382360841214506919
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6168933192541145612}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: de8eb6ba67905064fad50c1d356c17cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pauseBtn: {fileID: 2892870784007342995}
-  resumeBtn: {fileID: 2966599858477675335}
 --- !u!1 &6265712338415278308
 GameObject:
   m_ObjectHideFlags: 0
