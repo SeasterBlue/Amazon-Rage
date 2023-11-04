@@ -1006,6 +1006,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1471619182549588151, guid: d88a529b0780be54faec1aea0a3f6ef4,
         type: 3}
+      propertyPath: damage
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 1471619182549588151, guid: d88a529b0780be54faec1aea0a3f6ef4,
+        type: 3}
+      propertyPath: targetTag
+      value: Lumberjack
+      objectReference: {fileID: 0}
+    - target: {fileID: 1471619182549588151, guid: d88a529b0780be54faec1aea0a3f6ef4,
+        type: 3}
       propertyPath: tarjetTag
       value: Enemy
       objectReference: {fileID: 0}
@@ -2602,6 +2612,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2420859353232691537, guid: e91c55ade2f304943a4a38dcaa5c012f,
+        type: 3}
+      propertyPath: damage
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 2420859353232691537, guid: e91c55ade2f304943a4a38dcaa5c012f,
+        type: 3}
+      propertyPath: targetTag
+      value: Lumberjack
+      objectReference: {fileID: 0}
     - target: {fileID: 2420859353232691537, guid: e91c55ade2f304943a4a38dcaa5c012f,
         type: 3}
       propertyPath: tarjetTag

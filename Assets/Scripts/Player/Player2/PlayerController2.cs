@@ -35,6 +35,7 @@ public class PlayerController2 : MonoBehaviour
     Transform gunPoint;
     Transform rightArm;
     Transform rightHand;
+    Transform tipHand;
     Transform head;
     Transform plantHead;
     public GameObject machete;
@@ -57,6 +58,8 @@ public class PlayerController2 : MonoBehaviour
         gunPoint = GameObject.Find("GunPoint").GetComponent<Transform>();
         rightArm = GameObject.Find("Bone032").GetComponent<Transform>();
         rightHand = GameObject.Find("Bone029").GetComponent<Transform>();
+        tipHand = GameObject.Find("Bone033").GetComponent<Transform>();
+
         head = GameObject.Find("Bone018").GetComponent<Transform>();
         plantHead = GameObject.Find("Bone019").GetComponent<Transform>();
         animator = GetComponent<Animator>();
@@ -77,9 +80,7 @@ public class PlayerController2 : MonoBehaviour
         {
             if(!hasChainSaw && !hasMachete) animator.SetTrigger("isHeadAttack");
             if (hasChainSaw) animator.SetTrigger("AttackGunsaw");
-            if (!hasChainSaw && hasMachete) animator.SetTrigger("isAttacking");
-            
-
+            if (!hasChainSaw && hasMachete) Attack();
         }
 
        
@@ -109,7 +110,18 @@ public class PlayerController2 : MonoBehaviour
 
     void Attack()
     {
-        
+        if(!headChopped)
+        {
+            animator.SetTrigger("isAttacking");
+            if(hasChainSaw)
+            {
+                // Attack with Chainsaw
+            }
+            else if(hasMachete)
+            {
+                machete.GetComponent<Weapon>().attacking = true;
+            }
+        }
     }
 
     void HandleMovement(float moveSpeed)
@@ -275,7 +287,7 @@ public class PlayerController2 : MonoBehaviour
 
     public Transform GetMacheteNewTransform()
     {
-        return rightHand;
+        return tipHand;
     }
     public Transform GetGunsawNewTransform()
     {
