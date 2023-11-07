@@ -139,7 +139,7 @@ public class PlayerController2 : MonoBehaviour
             animator.SetBool("isWalking", isMoving && !isRunning);
             animator.SetBool("isRunning", isRunning);
 
-            // Obtén la dirección de la cámara en el plano horizontal
+            // Gets the camera direction on the horizontal plane
             Vector3 cameraForward = Camera.main.transform.forward;
             cameraForward.y = 0;
             cameraForward.Normalize();
@@ -149,7 +149,7 @@ public class PlayerController2 : MonoBehaviour
 
             float moveDistance = moveSpeed * Time.deltaTime;
 
-            // Movimiento
+            // Movement
             transform.position += moveDirection * moveDistance;
             transform.forward = Vector3.Slerp(transform.forward, moveDirection, Time.deltaTime * rotationSpeed);
         }        
