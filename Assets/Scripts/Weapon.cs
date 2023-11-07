@@ -9,7 +9,10 @@ public class Weapon : MonoBehaviour
 {
     public int damage;
     [SerializeField] private string targetTag;
-    [SerializeField] private AudioSource sfx;
+    [SerializeField] AudioClip attackSfx;
+    [SerializeField] AudioClip grabSfx;
+        
+    private AudioSource audioSource;
 
     private Lumberjack enemy;
     private PlayerController2 player;
@@ -20,7 +23,7 @@ public class Weapon : MonoBehaviour
     private void Start()
     {
         // collider = GetComponent<Collider>();
-        sfx = GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
         rb= GetComponent<Rigidbody>();
         attacking = false;
     }
@@ -51,7 +54,7 @@ public class Weapon : MonoBehaviour
                 player = other.gameObject.GetComponent<PlayerController2>();
                 player.RecieveDamage(damage);
             }
-            sfx.Play();
+            audioSource.Play();
         }
     }
 
