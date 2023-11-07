@@ -3,6 +3,7 @@ using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
+using UnityEngine.Playables;
 
 public class GameManager : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class GameManager : MonoBehaviour
     public float maxDistance = 160;
 
     public Light pointLight;
+    public PlayableDirector timelineDirector;
 
 
 
@@ -74,12 +76,23 @@ public class GameManager : MonoBehaviour
     public void OnVictory()
     {
         Debug.Log("Ganaste maldita perra");
+        PlayFinalCinematic();
     }
 
-    public void OnSeedPicked()
+    public void PlayFinalCinematic()
     {
-        
+        if (timelineDirector != null)
+        {
+            // Play the Timeline when the script starts
+            timelineDirector.Play();
+        }
+        else
+        {
+            Debug.LogError("PlayableDirector not assigned!");
+        }
     }
+
+    
 
 
 
