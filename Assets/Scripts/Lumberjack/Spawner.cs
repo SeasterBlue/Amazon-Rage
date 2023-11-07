@@ -15,17 +15,13 @@ public class Spawner : MonoBehaviour
         Assert.IsTrue(spawnPositions.Count > 0, "Spawn Positions has no positions @ Spawner.cs");
         objectPool = new ObjectPool(prefab, spawnPositions);
         objectPool.Init(spawnPositions.Count);
-        for(int i = 0; i < spawnPositions.Count; i++)
-        {
-            objectPool.Spawn<Lumberjack>();
-        }
     }
 
-    /*private void Update()
+    private void Update()
     {
         if (UnityEngine.Input.GetKeyDown(KeyCode.Pause))
         {
             objectPool.Spawn<Lumberjack>();
         }
-    }*/
+    }
 }
