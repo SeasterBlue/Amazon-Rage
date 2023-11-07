@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using Cinemachine;
 
 public class PlayerController2 : MonoBehaviour
 {
@@ -47,6 +48,7 @@ public class PlayerController2 : MonoBehaviour
     Animator animator;
     GameManager gameManager;
     public Vector2 inputVector;
+    private CinemachineFreeLook freeLookCamera;
     #endregion
 
     void Start()
@@ -67,7 +69,7 @@ public class PlayerController2 : MonoBehaviour
         WinningPot = GameObject.Find("FinalSpot").GetComponent<Transform>();
         animator = GetComponent<Animator>();
         gameManager= FindObjectOfType<GameManager>().GetComponent<GameManager>();
-        
+        freeLookCamera = FindObjectOfType<CinemachineFreeLook>();
     }
 
     private void Update()
@@ -137,15 +139,20 @@ public class PlayerController2 : MonoBehaviour
             animator.SetBool("isWalking", isMoving && !isRunning);
             animator.SetBool("isRunning", isRunning);
 
-            //
-            Vector3 moveDirection = new(inputVector.x, 0.0f, inputVector.y);
+            // Obtén la dirección de la cámara en el plano horizontal
+            Vector3 cameraForward = Camera.main.transform.forward;
+            cameraForward.y = 0;
+            cameraForward.Normalize();
+
+            Vector3 moveDirection = cameraForward * inputVector.y + Camera.main.transform.right * inputVector.x;
+            moveDirection.Normalize();
+
             float moveDistance = moveSpeed * Time.deltaTime;
 
-            //Movement
+            // Movimiento
             transform.position += moveDirection * moveDistance;
             transform.forward = Vector3.Slerp(transform.forward, moveDirection, Time.deltaTime * rotationSpeed);
-        }
-        
+        }        
     }
 
     void HandleJump()
