@@ -5265,7 +5265,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   terrain: {fileID: 1726147215}
   treePrefab: {fileID: 109824, guid: 673a5daab7ec28d4c9e7c80ea6a793c1, type: 3}
-  numberOfTrees: 1000
+  numberOfTrees: 2000
 --- !u!218 &1726147215 stripped
 Terrain:
   m_CorrespondingSourceObject: {fileID: 5195964947297330836, guid: 7a4a1a4fb4219da409509d29450f3846,
