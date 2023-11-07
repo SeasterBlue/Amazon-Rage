@@ -8,12 +8,22 @@ public class TreeSpawner : MonoBehaviour
     public GameObject treePrefab; // Prefab of the tree you want to spawn
     public int numberOfTrees = 1000; // Number of trees to spawn
 
+    private TreeInstance[] originalTreeInstances;
     void Start()
     {
+        if (terrain != null)
+        {
+            // Backup the original tree instances before making modifications
+            originalTreeInstances = terrain.terrainData.treeInstances;
 
+        }
+        else
+        {
+            Debug.LogError("Terrain not assigned!");
+        }
     }
 
-    public void SpawnTrees()
+    public void ModifyTerrain()
     {
         // Check if terrain and treePrefab are assigned
         if (terrain != null && treePrefab != null)
@@ -49,10 +59,18 @@ public class TreeSpawner : MonoBehaviour
 
             // Update the terrain to apply changes
             terrain.Flush();
+
         }
         else
         {
             Debug.LogError("Terrain or treePrefab not assigned!");
         }
+    }
+
+    public void ResetTerrain()
+    {
+        // Restore the original tree instances
+        terrain.terrainData.treeInstances = originalTreeInstances;
+        terrain.Flush();
     }
 }
