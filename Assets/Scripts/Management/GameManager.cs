@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 using UnityEngine.Playables;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -17,6 +18,9 @@ public class GameManager : MonoBehaviour
 
     public Light pointLight;
     public PlayableDirector timelineDirector;
+
+    public GameObject canvasDeath;
+    private Animator player;
 
 
 
@@ -45,6 +49,7 @@ public class GameManager : MonoBehaviour
     {
         finalSpot = GameObject.Find("FinalSpot").GetComponent<Transform>();
         magicPlant = GameObject.Find("MagicPlant").GetComponent<Transform>();
+        player = GameObject.Find("Player").GetComponent<Animator>();
     }
 
     void Update()
@@ -69,8 +74,17 @@ public class GameManager : MonoBehaviour
 
     public void OnGameOver()
     {
-        // Display animation,  UI and button to restart
-        Debug.Log("Game Over");
+        player.SetBool("isDead", true);
+        StartCoroutine(DelayChangeScene());
+
+    }
+
+    IEnumerator DelayChangeScene()
+    {
+        yield return new WaitForSeconds(2.0f);
+        canvasDeath.SetActive(true);
+        yield return new WaitForSeconds(4.0f);
+        SceneManager.LoadScene(0);
     }
 
     public void OnVictory()
@@ -90,6 +104,11 @@ public class GameManager : MonoBehaviour
         {
             Debug.LogError("PlayableDirector not assigned!");
         }
+    }
+
+    public void LoadInitialScene()
+    {
+        SceneManager.LoadScene(0);
     }
 
     
