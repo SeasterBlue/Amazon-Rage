@@ -11,20 +11,12 @@ public class Pause : MonoBehaviour
     [SerializeField] private GameObject canvas;
     [SerializeField] private GameObject audioObject;
 
-    private List<Weapon> weapons;
-    private Seed seed;
-    private List<Lumberjack> lumberjacks;
-    private PlayerController2 player;
-
     private AudioSource sfx;
 
     private bool pause = false;
 
     private void Start()
     {
-        //weapons = new List<Weapon>();
-        //weapons.
-
         sfx = audioObject.GetComponent<AudioSource>(); 
         canvas.SetActive(false);
     }
@@ -55,8 +47,7 @@ public class Pause : MonoBehaviour
         canvas.SetActive(true);
 
         // Time.timeScale = 0f;
-
-        
+        Debug.Log("Time Pause");
 
         sfx.Play();
         pause = true;

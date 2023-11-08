@@ -1,7 +1,7 @@
-
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Audio;
 
 [RequireComponent(typeof(Rigidbody), typeof(Collider), typeof(NavMeshAgent))]
 public class Lumberjack : RecyclableObject
@@ -13,21 +13,9 @@ public class Lumberjack : RecyclableObject
     private bool attacking = false;
     [SerializeField] private GameObject bloodParticles;
 
-    #region audio
-    AudioSource audioSource;
-    AudioData audioData;
-    AudioClip clip;
-    #endregion
-
-    private void Start()
-    {
-
-        audioSource = gameObject.GetComponent<AudioSource>();
-        audioData = gameObject.GetComponent<AudioData>();
-    }
-
     internal override void Init()
     {
+        
         health = 100;
         if(navAgent == null)
         {
@@ -37,6 +25,7 @@ public class Lumberjack : RecyclableObject
         }
         if(animator == null)
             animator = GetComponent<Animator>();
+
     }
 
     internal override void Release()
@@ -116,11 +105,4 @@ public class Lumberjack : RecyclableObject
         animator.SetBool("walking", true);
         attacking = false;
     }
-
-    public void PlayStep()
-    {
-        clip = audioData.steps[Random.Range(0,3)];
-        audioSource.PlayOneShot(clip, 1f);
-    }
-
 }
