@@ -3,10 +3,15 @@ using UnityEngine;
 
 public class Seed : MonoBehaviour
 {
+    #region variables
     private PlayerController2 player;
     private GravityApplier gravityApplier;
     private GameManager gameManager;
 
+    private AudioSource audioSource;
+    private AudioData audioData;
+    private AudioClip clip;
+    #endregion
 
     private void Awake()
     {
@@ -15,14 +20,22 @@ public class Seed : MonoBehaviour
         gameManager = FindObjectOfType<GameManager>();
     }
 
+    private void Start()
+    {
+     audioSource = GetComponent<AudioSource>();
+     audioData = GetComponent<AudioData>();
+    }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other) 
     {
         if (other.CompareTag("Player") && !player.HasSeed())
         {
             player.seed = this;
             player.isPlantOnMe = true;
             SetSeedParent(player);
+
+            clip = audioData.items[0];
+            audioSource.PlayOneShot(clip, 1f);
         }
         if (other.gameObject.tag == "FinalSpot" && player.HasSeed())
         {
@@ -31,8 +44,6 @@ public class Seed : MonoBehaviour
             player.isPlantOnMe = false;
             gravityApplier.applyGravity = true;
             gameManager.OnVictory();
-
-
         }
     }
 
@@ -60,8 +71,5 @@ public class Seed : MonoBehaviour
         gravityApplier.applyGravity = true;
         
     }
-
-
-
 
 }

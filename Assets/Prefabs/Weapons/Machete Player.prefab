@@ -214,6 +214,12 @@ PrefabInstance:
       propertyPath: tarjetTag
       value: Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 2429252629321017642, guid: d88a529b0780be54faec1aea0a3f6ef4,
+        type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 8602725183391638657, guid: 38c39fd64b5a45345a22ba65d8dd8b98,
+        type: 2}
     - target: {fileID: 2679386735757244151, guid: d88a529b0780be54faec1aea0a3f6ef4,
         type: 3}
       propertyPath: m_Size.x
@@ -237,7 +243,7 @@ PrefabInstance:
     - target: {fileID: 3560938678446296126, guid: d88a529b0780be54faec1aea0a3f6ef4,
         type: 3}
       propertyPath: m_Name
-      value: Machete Variant
+      value: Machete Player
       objectReference: {fileID: 0}
     - target: {fileID: 3560938678446296126, guid: d88a529b0780be54faec1aea0a3f6ef4,
         type: 3}
