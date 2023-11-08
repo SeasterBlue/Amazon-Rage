@@ -132,7 +132,13 @@ AudioMixerController:
   m_SuspendThreshold: 0
   m_EnableSuspend: 1
   m_UpdateMode: 0
-  m_ExposedParameters: []
+  m_ExposedParameters:
+  - guid: 7c039358ee41ee346a5ce9998007a3e7
+    name: AmbienceVolume
+  - guid: ff0e3f83a7e37d64684b9c46c44546f2
+    name: MusicVolume
+  - guid: 73d0ba77112db4841a26d3670c404630
+    name: EffectsVolume
   m_AudioMixerGroupViews:
   - guids:
     - 4ade2f9408cd9d54fbf850ba8cd313cf
@@ -200,6 +206,7 @@ AudioMixerSnapshotController:
     a058d3d00b72240498e07beaf4c26ec9: 0
     88336b03c2df3e147a051121a35f6690: 0
     689ec48352259884e85bdb50c63d072a: 0
+    ff0e3f83a7e37d64684b9c46c44546f2: 0
     bea8c5d3e9a463342aef7a3cf408aa0c: 0.029
     91b92fd398bdfe44baf2277fb10aa57b: 0.003
     ce51f5348be38fc46af6c315ded61da7: 0.084
@@ -210,6 +217,7 @@ AudioMixerSnapshotController:
     3375a5a592d4b5e4898c222badf99a67: 3
     73d0ba77112db4841a26d3670c404630: 0
     ba6259381160d8746b84d5a526461cd4: -1
+    7c039358ee41ee346a5ce9998007a3e7: 0
     10a3de3a8c9d3e04e9fb85719796f8a1: 10
     ea39e5ccee245304ebcc2a0ffb5259f2: 0.02
     28d9a8cc7f874884489d6fac4d91604b: 1.1
