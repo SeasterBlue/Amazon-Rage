@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     public PlayableDirector timelineDirector;
 
     public GameObject canvasDeath;
+    private Animator player;
 
 
 
@@ -48,6 +49,7 @@ public class GameManager : MonoBehaviour
     {
         finalSpot = GameObject.Find("FinalSpot").GetComponent<Transform>();
         magicPlant = GameObject.Find("MagicPlant").GetComponent<Transform>();
+        player = GameObject.Find("Player").GetComponent<Animator>();
     }
 
     void Update()
@@ -72,14 +74,15 @@ public class GameManager : MonoBehaviour
 
     public void OnGameOver()
     {
-        canvasDeath.SetActive(true);
-        Debug.Log("Game Over");
+        player.SetBool("isDead", true);
         StartCoroutine(DelayChangeScene());
 
     }
 
     IEnumerator DelayChangeScene()
     {
+        yield return new WaitForSeconds(2.0f);
+        canvasDeath.SetActive(true);
         yield return new WaitForSeconds(4.0f);
         SceneManager.LoadScene(0);
     }
