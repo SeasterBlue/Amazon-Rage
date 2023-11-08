@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 using UnityEngine.Playables;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -90,6 +91,11 @@ public class GameManager : MonoBehaviour
         {
             Debug.LogError("PlayableDirector not assigned!");
         }
+    }
+
+    public void LoadInitialScene()
+    {
+        SceneManager.LoadScene(0);
     }
 
     
