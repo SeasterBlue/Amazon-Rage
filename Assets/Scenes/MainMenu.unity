@@ -167,7 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0c439e90f4c6bf428c4522e70b29ede, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainMixer: {fileID: 24100000, guid: 38c39fd64b5a45345a22ba65d8dd8b98, type: 2}
+  mainMixer: {fileID: 0}
 --- !u!1 &60687365
 GameObject:
   m_ObjectHideFlags: 0
@@ -4153,7 +4153,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &467006756
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11472,7 +11472,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1156448351
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11512,7 +11512,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 10
+  m_text: 1
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4b013e6c9dfbce1429128d9b4f5b4ef7, type: 2}
   m_sharedMaterial: {fileID: -8852659411036887491, guid: 4b013e6c9dfbce1429128d9b4f5b4ef7,
@@ -14495,7 +14495,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1541901511
 RectTransform:
   m_ObjectHideFlags: 0
@@ -17787,7 +17787,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 391081293}
   m_HandleRect: {fileID: 391081292}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -20262,7 +20262,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2083961594}
   m_HandleRect: {fileID: 0}
   m_Direction: 0
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:

@@ -7,30 +7,48 @@ public class ParticlesManager : MonoBehaviour
     [SerializeField] GameObject leftFoot;
     [SerializeField] GameObject rightFoot;
     PlayerController2 player;
+
+    AudioData audioData;
+    AudioSource audioSource;
+    AudioClip audioClip;
+
     void Start()
     {
-       player = FindObjectOfType<PlayerController2>();
+        audioSource = GetComponent<AudioSource>();
+        audioData = GetComponent<AudioData>();
+        player = FindObjectOfType<PlayerController2>();
     }
 
 
     void ActiveParticleLeftFoot()
     {
-        if(player.isGrounded) leftFoot.SetActive(true);
+        if (player.isGrounded)
+        {
+            leftFoot.SetActive(true);
 
-    }
+            audioClip = audioData.steps[UnityEngine.Random.Range(0, 2)];
+            audioSource.PlayOneShot(audioClip, 0.6f);
+        }
 
-    void ActiveParticleRightFoot()
-    {
-        if (player.isGrounded) rightFoot.SetActive(true);
-    }
+        void ActiveParticleRightFoot()
+        {
+            if (player.isGrounded)
+            {
+                rightFoot.SetActive(true);
 
-    void NoActiveParticleLeftFoot()
-    {
-        leftFoot.SetActive(false);
-    }
+                audioClip = audioData.steps[UnityEngine.Random.Range(0, 2)];
+                audioSource.PlayOneShot(audioClip, 0.6f);
+            }
+        }
 
-    void NoActiveParticleRightFoot()
-    {
-        rightFoot.SetActive(false);
+        void NoActiveParticleLeftFoot()
+        {
+            leftFoot.SetActive(false);
+        }
+
+        void NoActiveParticleRightFoot()
+        {
+            rightFoot.SetActive(false);
+        }
     }
 }
