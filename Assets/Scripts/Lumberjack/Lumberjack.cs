@@ -11,6 +11,7 @@ public class Lumberjack : RecyclableObject
     private Animator animator;
     [SerializeField] private Weapon machete;
     private bool attacking = false;
+    [SerializeField] private GameObject bloodParticles;
 
     internal override void Init()
     {
@@ -33,6 +34,11 @@ public class Lumberjack : RecyclableObject
         animator.SetBool("attacking", false);
         animator.SetBool("walking", false);
         animator.SetInteger("health", 100);
+        ParticleSystem[] particles = bloodParticles.GetComponentsInChildren<ParticleSystem>();
+        foreach (ParticleSystem ps in particles)
+        {
+            ps.Stop();
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -83,7 +89,12 @@ public class Lumberjack : RecyclableObject
         animator.SetInteger("health", health);
         if (health <= 0)
         {
-            // ANIMATION AND SOUND OF DEAD
+            // VFX and SFX
+            ParticleSystem[] particles = bloodParticles.GetComponentsInChildren<ParticleSystem>();
+            foreach (ParticleSystem ps in particles)
+            {
+                ps.Play();
+            }
             Invoke(nameof(Recycle), 3);
         }
     }
