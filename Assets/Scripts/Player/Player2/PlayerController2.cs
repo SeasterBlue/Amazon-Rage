@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Audio;
+using Cinemachine;
 
 public class PlayerController2 : MonoBehaviour
 {
@@ -49,6 +50,7 @@ public class PlayerController2 : MonoBehaviour
     AudioSource audioSource;
     AudioData audioData;
     AudioClip audioToPlay;
+    private CinemachineFreeLook freeLookCamera;
     #endregion
 
     void Start()
@@ -73,6 +75,7 @@ public class PlayerController2 : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         audioData = GetComponent<AudioData>();
 
+        freeLookCamera = FindObjectOfType<CinemachineFreeLook>();
     }
 
     private void Update()
@@ -130,15 +133,20 @@ public class PlayerController2 : MonoBehaviour
             animator.SetBool("isWalking", isMoving && !isRunning);
             animator.SetBool("isRunning", isRunning);
 
-            //
-            Vector3 moveDirection = new(inputVector.x, 0.0f, inputVector.y);
+            // Gets the camera direction on the horizontal plane
+            Vector3 cameraForward = Camera.main.transform.forward;
+            cameraForward.y = 0;
+            cameraForward.Normalize();
+
+            Vector3 moveDirection = cameraForward * inputVector.y + Camera.main.transform.right * inputVector.x;
+            moveDirection.Normalize();
+
             float moveDistance = moveSpeed * Time.deltaTime;
 
-            //Movement
+            // Movement
             transform.position += moveDirection * moveDistance;
             transform.forward = Vector3.Slerp(transform.forward, moveDirection, Time.deltaTime * rotationSpeed);
-        }
-        
+        }        
     }
 
     void HandleJump()
