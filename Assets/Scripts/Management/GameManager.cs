@@ -19,6 +19,8 @@ public class GameManager : MonoBehaviour
     public Light pointLight;
     public PlayableDirector timelineDirector;
 
+    public GameObject canvasDeath;
+
 
 
     public static GameManager Instance
@@ -70,8 +72,16 @@ public class GameManager : MonoBehaviour
 
     public void OnGameOver()
     {
-        // Display animation,  UI and button to restart
+        canvasDeath.SetActive(true);
         Debug.Log("Game Over");
+        StartCoroutine(DelayChangeScene());
+
+    }
+
+    IEnumerator DelayChangeScene()
+    {
+        yield return new WaitForSeconds(4.0f);
+        SceneManager.LoadScene(0);
     }
 
     public void OnVictory()
