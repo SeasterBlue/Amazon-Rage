@@ -1,5 +1,8 @@
+using System.Collections;
+using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Audio;
+using Cinemachine;
 
 public class PlayerController2 : MonoBehaviour
 {
@@ -45,10 +48,7 @@ public class PlayerController2 : MonoBehaviour
     Animator animator;
     GameManager gameManager;
     public Vector2 inputVector;
-
-    AudioSource audioSource;
-    AudioData audioData;
-    AudioClip audioToPlay;
+    private CinemachineFreeLook freeLookCamera;
     #endregion
 
     void Start()
@@ -69,10 +69,7 @@ public class PlayerController2 : MonoBehaviour
         WinningPot = GameObject.Find("FinalSpot").GetComponent<Transform>();
         animator = GetComponent<Animator>();
         gameManager= FindObjectOfType<GameManager>().GetComponent<GameManager>();
-
-        audioSource = GetComponent<AudioSource>();
-        audioData = GetComponent<AudioData>();
-
+        freeLookCamera = FindObjectOfType<CinemachineFreeLook>();
     }
 
     private void Update()
@@ -90,6 +87,19 @@ public class PlayerController2 : MonoBehaviour
             if (hasChainSaw || hasMachete) Attack();
         }
 
+       
+
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            seed.RemoveSeedParent();
+        }
+
+        if(Input.GetKeyDown(KeyCode.X))
+        {
+            if (twoArmsChopped) CutHead();
+            if (oneArmChopped) CutRightArm();
+            CutLeftArm();
+        }
     }
 
     void FixedUpdate()
@@ -98,16 +108,15 @@ public class PlayerController2 : MonoBehaviour
         isRunning = currentSpeed == 7.0f;
 
         HandleMovement(currentSpeed);
+        
+       
     }
 
     void Attack()
     {
-        if (!headChopped)
+        if(!headChopped)
         {
-            audioToPlay = audioData.attack[UnityEngine.Random.Range(0,2)];
-            audioSource.PlayOneShot(audioToPlay,1f);
-
-            if (hasChainSaw)
+            if(hasChainSaw)
             {
                 animator.SetTrigger("AttackGunsaw");
                 chainsaw.GetComponent<Weapon>().attacking = true;
@@ -130,34 +139,32 @@ public class PlayerController2 : MonoBehaviour
             animator.SetBool("isWalking", isMoving && !isRunning);
             animator.SetBool("isRunning", isRunning);
 
-            //
-            Vector3 moveDirection = new(inputVector.x, 0.0f, inputVector.y);
+            // Gets the camera direction on the horizontal plane
+            Vector3 cameraForward = Camera.main.transform.forward;
+            cameraForward.y = 0;
+            cameraForward.Normalize();
+
+            Vector3 moveDirection = cameraForward * inputVector.y + Camera.main.transform.right * inputVector.x;
+            moveDirection.Normalize();
+
             float moveDistance = moveSpeed * Time.deltaTime;
 
-            //Movement
+            // Movement
             transform.position += moveDirection * moveDistance;
             transform.forward = Vector3.Slerp(transform.forward, moveDirection, Time.deltaTime * rotationSpeed);
-        }
-        
+        }        
     }
 
     void HandleJump()
     {
-        audioToPlay = audioData.jump;
-        audioSource.PlayOneShot(audioToPlay,1f);
 
         if(isGrounded) rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
     }
 
     void CutLeftArm()
     {
-
         leftArm.localScale = new Vector3(0.0001f, 0.0001f, 0.0001f);
         oneArmChopped = true;
-
-        audioToPlay = audioData.dead[0];
-        audioSource.PlayOneShot(audioToPlay, 1f);
-
         if (hasChainSaw && !hasMachete)
         {
             Object.Destroy(chainsaw);
@@ -173,29 +180,23 @@ public class PlayerController2 : MonoBehaviour
             machete.transform.parent = GetMacheteNewTransform();
             machete.transform.localPosition = offsetMachete;
             machete.transform.localRotation = offsetMacheteRotation;
+
         }
+
     }
 
     void CutRightArm()
     {
-     
         rightArm.localScale = new Vector3(0.0001f, 0.0001f, 0.0001f); twoArmsChopped = true; hasMachete = false;
-        if (hasMachete && !hasChainSaw) Object.Destroy(machete);
-
-        audioToPlay = audioData.dead[1];
-        audioSource.PlayOneShot(audioToPlay, 1f);
-
+        if(hasMachete && !hasChainSaw) Object.Destroy(machete);
     }
 
     void CutHead()
     {
-   
         head.localScale = new Vector3(0.1f, 0.1f, 0.1f);
         plantHead.localScale = new Vector3(7, 7, 7);
         headChopped = true;
 
-        audioToPlay = audioData.dead[2];
-        audioSource.PlayOneShot(audioToPlay, 1f);
 
         gameManager.OnGameOver(); //eltrigger de que pierde.
     }
@@ -224,7 +225,6 @@ public class PlayerController2 : MonoBehaviour
     {
         return seed != null;
     }
-
 
     private void OnTriggerEnter(Collider other)
     {
@@ -313,6 +313,7 @@ public class PlayerController2 : MonoBehaviour
     {
         return WinningPot;
     }
+
 
     public void RecieveDamage(int damage)
     {
